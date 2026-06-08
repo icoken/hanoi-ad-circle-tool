@@ -1,0 +1,18 @@
+# Hanoi Ad Circle Tool
+
+Static GitHub Pages deployment for the Hanoi advertising circle zoning tool.
+
+## Files
+
+- `index.html`: GitHub Pages entry page.
+- `河内圈_种子数据.js`: seed coordinate data.
+- `河内圈_工具代码.js`: map, zoning, export, and coordinate lookup logic.
+- `vendor/`: local Leaflet and SheetJS assets so Excel export does not depend on CDN loading.
+
+## Deploy With GitHub Pages
+
+1. Create a public GitHub repository.
+2. Upload all files in this folder.
+3. In the repository, go to Settings > Pages.
+4. Set Source to `Deploy from a branch`, Branch to `main`, Folder to `/root`.
+5. Open `https://<username>.github.io/<repo-name>/` after Pages finishes building.
