@@ -25,7 +25,7 @@
       r2Label: '近郊半径 km',
       ringHint: '单中心模式：按上方所选圆心，核心一组，核心以外按 东北/东南/西南/西北 ×（近郊/远郊）分组。<br>三中心模式：每个圈划给最近的中心（Thái Hà / Xã Đàn / Bà Triệu），再按 核心/近郊/远郊 分档，共9组；三中心相距仅1–3km，建议把核心半径调小到2–3km。',
       zonesTitle: '分区 ＝ 广告系列名（可直接改名；两区改成同名即合并为一组）',
-      zonesHint: '第一行红色＝{anchor}屏蔽圈（#1）；第二行红色＝可自选多个外围圈组成的附加屏蔽组。点击地图圆圈可加入/移出附加屏蔽组。导入 Google Ads 后请把屏蔽组设为<b>排除位置</b>。「复制」＝复制该区 Campaign + Location 两列。',
+      zonesHint: '第一行红色＝屏蔽圈组；第二行红色＝可自选多个外围圈组成的附加屏蔽组。点击地图圆圈可加入/移出附加屏蔽组。导入 Google Ads 后请把屏蔽组设为<b>排除位置</b>。「复制」＝复制该区 Campaign + Location 两列。',
       coordTitle: '坐标检索',
       coordPlaceholder: '输入或粘贴坐标，例如 21.0115,105.8496',
       coordSearch: '查找所在圆圈',
@@ -39,7 +39,7 @@
       reset: '重置全部调整',
       blockRadiusLabel: '屏蔽圈半径',
       outerRadiusLabel: '外围圈半径',
-      radiusHint: '屏蔽圈(红色,#1)固定以 {anchor} 为圆心；外围圈以它为起点向外蜂窝排布，被屏蔽圈完全盖住的外围圈自动剔除。改半径后立即重画，可在地图上测试不同组合。',
+      radiusHint: '红色屏蔽圈可由一个或多个小圆组成；外围圈以 {anchor} 为起点向外蜂窝排布，被屏蔽圈完全盖住的外围圈自动剔除。改半径后立即重画，可在地图上测试不同组合。',
       allAssigned: '✓ 全部已分配',
       countMismatch: '⚠ 数量不符！',
       blockDefaultName: '屏蔽-{anchor}',
@@ -68,7 +68,7 @@
       adCircleZone: '投放圈 · 当前分区',
       radius: '半径',
       distCenter: '距圆心',
-      blockTooltip: '#1 屏蔽圈 · {name}（{anchor}，{radius}）',
+      blockTooltip: '屏蔽圈 · {name}（{anchor}，{radius}）',
       circleTooltip: '#{id} · {name}{manual}<br>{location}',
       centerTooltip: '中心：{name}',
       manual: '（手动）',
@@ -76,8 +76,8 @@
       reassignTo: '改到：',
       confirm: '确定',
       clearAuto: '恢复自动',
-      rangeHint: '屏蔽圈 1 个（#1＝{anchor}，{blockRadius}）＋ 外围 {outerCount} 个（{outerRadius}）｜ 由 {seedCount} 个旧1mi圆心定范围',
-      subline: '圈#1＝屏蔽圈：固定以 {anchor} 为圆心，半径 {blockRadius}（导入后设为排除位置即可屏蔽该区域）。外围投放圈：半径 {outerRadius}，以此圆心为起点蜂窝排布（间距 √3×{outer}≈{spacing}km，行距 {rowSpacing}km），覆盖范围对齐原 {seedCount} 个 1mi 手工圈，编号按离屏蔽圆心由近到远。',
+      rangeHint: '屏蔽圈 {blockCount} 个（{blockRadius}）＋ 外围 {outerCount} 个（{outerRadius}）｜ 蜂窝锚点={anchor}｜由 {seedCount} 个旧1mi圆心定范围',
+      subline: '屏蔽圈：{blockCount} 个红色排除位置，当前半径 {blockRadius}。外围投放圈：半径 {outerRadius}，以 {anchor} 为起点蜂窝排布（间距 √3×{outer}≈{spacing}km，行距 {rowSpacing}km），覆盖范围对齐原 {seedCount} 个 1mi 手工圈。',
       detailAll: '明细_全部',
       importAll: '导入_全部',
       sheetFallback: '区',
@@ -110,7 +110,7 @@
       r2Label: 'Bán kính cận đô km',
       ringHint: 'Chế độ một tâm: nhóm lõi riêng; ngoài lõi chia theo Đông Bắc/Đông Nam/Tây Nam/Tây Bắc × cận đô/xa.<br>Chế độ ba tâm: mỗi vòng thuộc về tâm gần nhất (Thái Hà / Xã Đàn / Bà Triệu), rồi chia lõi/cận đô/xa, tổng 9 nhóm; ba tâm chỉ cách nhau 1–3km, nên đặt bán kính lõi khoảng 2–3km.',
       zonesTitle: 'Vùng = tên chiến dịch (có thể đổi tên; đặt trùng tên để gộp vùng)',
-      zonesHint: 'Dòng đỏ đầu tiên là vòng chặn {anchor} (#1); dòng đỏ thứ hai là nhóm chặn bổ sung do bạn tự chọn từ các vòng ngoài. Bấm vòng trên bản đồ để thêm/bỏ khỏi nhóm chặn bổ sung. Khi nhập vào Google Ads, hãy đặt các nhóm chặn trong <b>vị trí loại trừ</b>. Nút Sao chép sẽ sao chép hai cột Campaign + Location.',
+      zonesHint: 'Dòng đỏ đầu tiên là nhóm vòng chặn; dòng đỏ thứ hai là nhóm chặn bổ sung do bạn tự chọn từ các vòng ngoài. Bấm vòng trên bản đồ để thêm/bỏ khỏi nhóm chặn bổ sung. Khi nhập vào Google Ads, hãy đặt các nhóm chặn trong <b>vị trí loại trừ</b>. Nút Sao chép sẽ sao chép hai cột Campaign + Location.',
       coordTitle: 'Tra cứu tọa độ',
       coordPlaceholder: 'Nhập hoặc dán tọa độ, ví dụ 21.0115,105.8496',
       coordSearch: 'Tìm vòng chứa tọa độ',
@@ -124,7 +124,7 @@
       reset: 'Đặt lại toàn bộ chỉnh sửa',
       blockRadiusLabel: 'Bán kính chặn',
       outerRadiusLabel: 'Bán kính vòng ngoài',
-      radiusHint: 'Vòng chặn màu đỏ (#1) cố định tại {anchor}; các vòng ngoài được xếp dạng tổ ong từ điểm này. Vòng ngoài bị vòng chặn phủ hoàn toàn sẽ bị loại. Đổi bán kính sẽ vẽ lại ngay.',
+      radiusHint: 'Vòng chặn màu đỏ có thể gồm một hoặc nhiều vòng nhỏ; các vòng ngoài được xếp dạng tổ ong từ {anchor}. Vòng ngoài bị vòng chặn phủ hoàn toàn sẽ bị loại. Đổi bán kính sẽ vẽ lại ngay.',
       allAssigned: '✓ Đã phân vùng toàn bộ',
       countMismatch: '⚠ Số lượng không khớp!',
       blockDefaultName: 'Chặn-{anchor}',
@@ -153,7 +153,7 @@
       adCircleZone: 'Vòng chạy quảng cáo · vùng hiện tại',
       radius: 'Bán kính',
       distCenter: 'Cách tâm',
-      blockTooltip: '#1 Vòng chặn · {name} ({anchor}, {radius})',
+      blockTooltip: 'Vòng chặn · {name} ({anchor}, {radius})',
       circleTooltip: '#{id} · {name}{manual}<br>{location}',
       centerTooltip: 'Tâm: {name}',
       manual: ' (chỉnh tay)',
@@ -161,8 +161,8 @@
       reassignTo: 'Chuyển sang:',
       confirm: 'Xác nhận',
       clearAuto: 'Khôi phục tự động',
-      rangeHint: 'Vòng chặn 1 (#1 = {anchor}, {blockRadius}) + vòng ngoài {outerCount} ({outerRadius}) | phạm vi lấy từ {seedCount} tâm vòng 1mi cũ',
-      subline: 'Vòng #1 là vòng chặn cố định tại {anchor}, bán kính {blockRadius}. Vòng ngoài bán kính {outerRadius}, xếp dạng tổ ong từ tâm này (khoảng cách ngang √3×{outer}≈{spacing}km, khoảng cách hàng {rowSpacing}km), phủ phạm vi của {seedCount} vòng 1mi cũ và đánh số theo khoảng cách tới tâm chặn.',
+      rangeHint: '{blockCount} vòng chặn ({blockRadius}) + {outerCount} vòng ngoài ({outerRadius}) | tâm neo tổ ong={anchor} | phạm vi lấy từ {seedCount} tâm vòng 1mi cũ',
+      subline: 'Vòng chặn: {blockCount} vị trí loại trừ màu đỏ, bán kính hiện tại {blockRadius}. Vòng ngoài bán kính {outerRadius}, xếp dạng tổ ong từ {anchor} (khoảng cách ngang √3×{outer}≈{spacing}km, khoảng cách hàng {rowSpacing}km), phủ phạm vi của {seedCount} vòng 1mi cũ.',
       detailAll: 'Chi_tiet_tat_ca',
       importAll: 'Nhap_tat_ca',
       sheetFallback: 'Vung',
@@ -206,7 +206,7 @@
   var RADIUS_OPTIONS = [2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8];
   function rlabel(r){ return (r % 1 === 0 ? String(Math.round(r)) : String(r)) + 'km'; }
 
-  // ---------- 锚点：圈#1=屏蔽圈圆心，蜂窝由此起铺 ----------
+  // ---------- 锚点：蜂窝由此起铺；屏蔽圈可单独配置 ----------
   var DEFAULT_ANCHOR = { name: '193 Bà Triệu', lat: 21.0115, lng: 105.8496 };
   function normalizeAnchor(src){
     if (!src || typeof src !== 'object') return DEFAULT_ANCHOR;
@@ -225,6 +225,12 @@
     };
   }
   var ANCHOR = normalizeAnchor(window.HANOI_ANCHOR);
+  function localizedConfig(baseName){
+    var zh = window[baseName + '_ZH'];
+    var vi = window[baseName + '_VI'];
+    var plain = window[baseName];
+    return currentLang === 'vi' ? (vi || plain || zh || '') : (zh || plain || vi || '');
+  }
   function anchorName(){
     return currentLang === 'vi' ? (ANCHOR.nameVi || ANCHOR.name) : (ANCHOR.nameZh || ANCHOR.name);
   }
@@ -246,7 +252,30 @@
     Object.keys(vars).forEach(function(k){ out[k] = vars[k]; });
     return out;
   }
-  function appTitleText(){ return fmt('appTitle', anchorVars()); }
+  function appTitleText(){ return localizedConfig('HANOI_PAGE_TITLE') || fmt('appTitle', anchorVars()); }
+  function blockDefaultText(){
+    return localizedConfig('HANOI_BLOCK_GROUP_NAME') || fmt('blockDefaultName', anchorVars());
+  }
+  function normalizeBlockConfig(src, idx){
+    if (!src || typeof src !== 'object') return null;
+    var lat = parseFloat(src.lat);
+    var lng = parseFloat(src.lng);
+    if (!isFinite(lat) || !isFinite(lng)) return null;
+    var fallback = anchorName() + '-' + (idx + 1);
+    return {
+      name: src.name || src.nameZh || fallback,
+      nameZh: src.nameZh || src.name || fallback,
+      nameVi: src.nameVi || src.name || src.nameZh || fallback,
+      lat: lat,
+      lng: lng
+    };
+  }
+  var BLOCK_CONFIGS = Array.isArray(window.HANOI_BLOCK_CIRCLES)
+    ? window.HANOI_BLOCK_CIRCLES.map(normalizeBlockConfig).filter(Boolean)
+    : [];
+  if (!BLOCK_CONFIGS.length) {
+    BLOCK_CONFIGS = [normalizeBlockConfig({ name: anchorName(), nameZh: ANCHOR.nameZh, nameVi: ANCHOR.nameVi, lat: ANCHOR.lat, lng: ANCHOR.lng }, 0)];
+  }
 
   var KM_LAT = 110.86;
   var KM_LNG = 111.32 * Math.cos(21 * Math.PI / 180);
@@ -258,6 +287,7 @@
   function updateSubline(){
     var sub = document.getElementById('subline');
     if (sub) sub.textContent = fmt('subline', withAnchor({
+      blockCount: blockPts.length || BLOCK_CONFIGS.length,
       blockRadius: rlabel(R_BLOCK),
       outerRadius: rlabel(R_OUTER),
       outer: R_OUTER,
@@ -306,9 +336,9 @@
     modeCard.parentNode.insertBefore(card, modeCard);
   })();
 
-  // ---------- 生成蜂窝布局（锚点=193，确定性算法） ----------
+  // ---------- 生成蜂窝布局（锚点确定，屏蔽圈可为一个或多个） ----------
   var pts = [];
-  var blockPt = null;
+  var blockPts = [];
   var lats = [], lngs = [];
   var latMin = 0, latMax = 0, lngMin = 0, lngMax = 0;
 
@@ -323,6 +353,12 @@
       var dx = (lo - seeds[k].lng) * KM_LNG;
       var dy = (la - seeds[k].lat) * KM_LAT;
       if (dx * dx + dy * dy <= lim) return true;
+    }
+    return false;
+  }
+  function fullyCoveredByBlock(la, lo){
+    for (var b = 0; b < BLOCK_CONFIGS.length; b++) {
+      if (distKmRaw(la, lo, BLOCK_CONFIGS[b].lat, BLOCK_CONFIGS[b].lng) + R_OUTER <= R_BLOCK + 1e-9) return true;
     }
     return false;
   }
@@ -343,21 +379,33 @@
         if (i === 0 && j === 0) continue;
         if (!nearSeed(la, lo)) continue;
         var dC = distKmRaw(la, lo, ANCHOR.lat, ANCHOR.lng);
-        if (dC + R_OUTER <= R_BLOCK + 1e-9) continue;
+        if (fullyCoveredByBlock(la, lo)) continue;
         out.push({ lat: la, lng: lo, dC: dC });
       }
     }
     out.sort(function(a, b){ return a.dC - b.dC; });
-    pts = out.map(function(o, idx){
-      return { id: idx + 2, lat: +o.lat.toFixed(6), lng: +o.lng.toFixed(6), r: R_OUTER, override: null, extraBlock: false };
+    blockPts = BLOCK_CONFIGS.map(function(b, idx){
+      return {
+        id: idx + 1,
+        lat: +b.lat.toFixed(6),
+        lng: +b.lng.toFixed(6),
+        r: R_BLOCK,
+        blocked: true,
+        name: b.name,
+        nameZh: b.nameZh,
+        nameVi: b.nameVi
+      };
     });
-    blockPt = { id: 1, lat: +ANCHOR.lat.toFixed(6), lng: +ANCHOR.lng.toFixed(6), r: R_BLOCK, blocked: true };
+    pts = out.map(function(o, idx){
+      return { id: idx + blockPts.length + 1, lat: +o.lat.toFixed(6), lng: +o.lng.toFixed(6), r: R_OUTER, override: null, extraBlock: false };
+    });
     lats = pts.map(function(p){ return p.lat; });
     lngs = pts.map(function(p){ return p.lng; });
     latMin = Math.min.apply(null, lats); latMax = Math.max.apply(null, lats);
     lngMin = Math.min.apply(null, lngs); lngMax = Math.max.apply(null, lngs);
-    document.getElementById('total').textContent = (pts.length + 1);
+    document.getElementById('total').textContent = (pts.length + blockPts.length);
     document.getElementById('rangehint').textContent = fmt('rangeHint', withAnchor({
+      blockCount: blockPts.length,
       blockRadius: rlabel(R_BLOCK),
       outerCount: pts.length,
       outerRadius: rlabel(R_OUTER),
@@ -418,7 +466,10 @@
     return (campaign[k] !== undefined && campaign[k] !== '') ? campaign[k] : defNames()[zi];
   }
   function blockName(){
-    return (campaign.block !== undefined && campaign.block !== '') ? campaign.block : fmt('blockDefaultName', anchorVars());
+    return (campaign.block !== undefined && campaign.block !== '') ? campaign.block : blockDefaultText();
+  }
+  function blockPointName(p){
+    return currentLang === 'vi' ? (p.nameVi || p.name) : (p.nameZh || p.name);
   }
   function extraBlockName(){
     return (campaign.extraBlock !== undefined && campaign.extraBlock !== '') ? campaign.extraBlock : text('extraBlockDefaultName');
@@ -487,6 +538,7 @@
     updateSubline();
     if (pts.length) {
       document.getElementById('rangehint').textContent = fmt('rangeHint', withAnchor({
+        blockCount: blockPts.length,
         blockRadius: rlabel(R_BLOCK),
         outerCount: pts.length,
         outerRadius: rlabel(R_OUTER),
@@ -585,10 +637,6 @@
 
   function render(){
     circleLayer.clearLayers();
-    var bc = L.circle([blockPt.lat, blockPt.lng], { radius: blockPt.r * 1000, color: BLOCK_COLOR, weight: 2.5, fillColor: BLOCK_COLOR, fillOpacity: 0.18, dashArray: '4,4' });
-    bc.bindTooltip(fmt('blockTooltip', withAnchor({ name: blockName(), radius: rlabel(blockPt.r) })), { sticky: true });
-    circleLayer.addLayer(bc);
-    circleLayer.addLayer(L.circleMarker([blockPt.lat, blockPt.lng], { radius: 4, color: BLOCK_COLOR, fillColor: BLOCK_COLOR, fillOpacity: 1 }));
     var counts = [0,0,0,0,0,0,0,0,0];
     var extraCount = 0;
     for (var i = 0; i < pts.length; i++) {
@@ -615,9 +663,15 @@
         circleLayer.addLayer(c);
       })(pts[i]);
     }
-    var assigned = counts.reduce(function(a,b){ return a + b; }, 0) + extraCount + 1;
+    blockPts.forEach(function(bp){
+      var bc = L.circle([bp.lat, bp.lng], { radius: bp.r * 1000, color: BLOCK_COLOR, weight: 2.5, fillColor: BLOCK_COLOR, fillOpacity: 0.22, dashArray: '4,4' });
+      bc.bindTooltip(fmt('blockTooltip', withAnchor({ name: blockName(), anchor: blockPointName(bp), radius: rlabel(bp.r) })), { sticky: true });
+      circleLayer.addLayer(bc);
+      circleLayer.addLayer(L.circleMarker([bp.lat, bp.lng], { radius: 4, color: BLOCK_COLOR, fillColor: BLOCK_COLOR, fillOpacity: 1 }));
+    });
+    var assigned = counts.reduce(function(a,b){ return a + b; }, 0) + extraCount + blockPts.length;
     document.getElementById('assigned').textContent = assigned;
-    document.getElementById('checkmark').innerHTML = (assigned === pts.length + 1)
+    document.getElementById('checkmark').innerHTML = (assigned === pts.length + blockPts.length)
       ? '<span class="ok">' + text('allAssigned') + '</span>' : '<span class="warn">' + text('countMismatch') + '</span>';
     drawLines();
     renderZones(counts, extraCount);
@@ -632,7 +686,7 @@
     var binp = document.createElement('input'); binp.type = 'text'; binp.value = blockName();
     binp.addEventListener('input', function(){ campaign.block = binp.value; });
     bdiv.appendChild(binp);
-    var bcnt = document.createElement('span'); bcnt.className = 'cnt'; bcnt.textContent = '1'; bdiv.appendChild(bcnt);
+    var bcnt = document.createElement('span'); bcnt.className = 'cnt'; bcnt.textContent = blockPts.length; bdiv.appendChild(bcnt);
     var bcp = document.createElement('button'); bcp.className = 'mini'; bcp.textContent = text('copy');
     bcp.addEventListener('click', function(){ copyBlock(); });
     bdiv.appendChild(bcp);
@@ -694,7 +748,9 @@
   // ---------- 导出 ----------
   function locStr(p){ return '(' + rlabel(p.r) + ':' + p.lat.toFixed(6) + ':' + p.lng.toFixed(6) + ')'; }
   function buildRows(){
-    var rows = [{ ID: 1, Zone: blockName(), Campaign: blockName(), Location: locStr(blockPt), Latitude: blockPt.lat, Longitude: blockPt.lng }];
+    var rows = blockPts.map(function(bp){
+      return { ID: bp.id, Zone: blockName(), Campaign: blockName(), Location: locStr(bp), Latitude: bp.lat, Longitude: bp.lng };
+    });
     pts.forEach(function(p){
       var zi = assignZone(p);
       var name = p.extraBlock ? extraBlockName() : curName(zi);
@@ -737,8 +793,9 @@
     dl(new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' }), fmt('filePrefix', { blockRadius: rlabel(R_BLOCK), outerRadius: rlabel(R_OUTER), stamp: stamp() }) + '.csv');
   }
   function copyBlock(){
-    var tsv = 'Campaign\tLocation\n' + blockName() + '\t' + locStr(blockPt);
-    doCopy(tsv, blockName(), 1);
+    var name = blockName();
+    var tsv = 'Campaign\tLocation\n' + blockPts.map(function(bp){ return name + '\t' + locStr(bp); }).join('\n');
+    doCopy(tsv, name, blockPts.length);
   }
   function copyExtraBlock(){
     var name = extraBlockName();
@@ -855,7 +912,7 @@
         });
       }
     }
-    addHit(blockPt, true);
+    blockPts.forEach(function(bp){ addHit(bp, true); });
     pts.forEach(function(p){ addHit(p, false); });
     hits.sort(function(a, b){ return a.dist - b.dist; });
     return hits;
@@ -879,7 +936,7 @@
         };
       }
     }
-    test(blockPt, true);
+    blockPts.forEach(function(bp){ test(bp, true); });
     pts.forEach(function(p){ test(p, false); });
     return best;
   }

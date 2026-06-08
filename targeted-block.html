@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>河内广告圈 · 分区工具（定向屏蔽中心）</title>
+<title>河内广告圈 · 分区工具（小圈组合屏蔽）</title>
 <link rel="stylesheet" href="vendor/leaflet/leaflet.css"/>
 <style>
   *{box-sizing:border-box;}
@@ -44,7 +44,7 @@
 <div id="wrap">
   <div id="map"></div>
   <div id="panel">
-    <h1 id="h1t">河内广告圈 · 分区工具（定向屏蔽中心）</h1>
+    <h1 id="h1t">河内广告圈 · 分区工具（小圈组合屏蔽）</h1>
     <div class="sub" id="subline"></div>
 
     <div class="card lang-card">
@@ -125,16 +125,25 @@
 <script src="vendor/xlsx/xlsx.full.min.js"></script>
 <script>
 window.R_CIRCLE = 3;
-window.R_BLOCK = 5.5;
+window.R_BLOCK = 2.5;
+window.HANOI_PAGE_TITLE_ZH = '河内广告圈 · 分区工具（小圈组合屏蔽）';
+window.HANOI_PAGE_TITLE_VI = 'Công cụ chia vùng vòng tròn quảng cáo Hà Nội (nhóm vòng chặn nhỏ)';
+window.HANOI_BLOCK_GROUP_NAME_ZH = '屏蔽-小圈组合';
+window.HANOI_BLOCK_GROUP_NAME_VI = 'Chặn-nhóm vòng nhỏ';
 window.HANOI_ANCHOR = {
-  name: '定向屏蔽中心',
-  nameZh: '定向屏蔽中心',
-  nameVi: 'Tâm chặn mục tiêu',
-  labelZh: '定向屏蔽中心（21.030049,105.848092）',
-  labelVi: 'Tâm chặn mục tiêu (21.030049,105.848092)',
+  name: '小圈组合',
+  nameZh: '小圈组合',
+  nameVi: 'Nhóm vòng nhỏ',
+  labelZh: '蜂窝锚点（21.030049,105.848092）',
+  labelVi: 'Tâm neo tổ ong (21.030049,105.848092)',
   lat: 21.030049,
   lng: 105.848092
 };
+window.HANOI_BLOCK_CIRCLES = [
+  { nameZh: '来源西北', nameVi: 'Nguồn Tây Bắc', lat: 21.057110, lng: 105.831425 },
+  { nameZh: '来源东南', nameVi: 'Nguồn Đông Nam', lat: 21.002987, lng: 105.864758 },
+  { nameZh: '来源西南', nameVi: 'Nguồn Tây Nam', lat: 21.002987, lng: 105.831425 }
+];
 window.HANOI_DEFAULT_RING_CENTER = 'anchor';
 </script>
 <script src="河内圈_种子数据.js" charset="utf-8"></script>
