@@ -1,7 +1,183 @@
 (function(){
   "use strict";
+  var UI = {
+    zh: {
+      appTitle: '河内广告圈 · 分区工具（193屏蔽＋蜂窝）',
+      langLabel: '语言',
+      langAuto: '自动',
+      langZh: '中文',
+      langVi: 'Tiếng Việt',
+      totalLabel: '总圈数',
+      assignedLabel: '已分配',
+      showSeedsPrefix: '显示旧圈对照：',
+      showSeedsLabel: '叠加显示原1mi圆心(灰点)',
+      modeLabel: '分区模式',
+      modeGrid: '方位 3×3 网格（西北…中心…东南）',
+      modeRing: '圈层＋方位（单中心：核心/近郊/远郊×四向）',
+      modeMulti: '三中心圈层（按最近中心：Thái Hà/Xã Đàn/Bà Triệu）',
+      hlat1Label: '南北分界·下',
+      hlat2Label: '南北分界·上',
+      vlng1Label: '东西分界·左',
+      vlng2Label: '东西分界·右',
+      balance: '按数量自动均衡分界线',
+      centerLabel: '圆心',
+      r1Label: '核心半径 km',
+      r2Label: '近郊半径 km',
+      ringHint: '单中心模式：按上方所选圆心，核心一组，核心以外按 东北/东南/西南/西北 ×（近郊/远郊）分组。<br>三中心模式：每个圈划给最近的中心（Thái Hà / Xã Đàn / Bà Triệu），再按 核心/近郊/远郊 分档，共9组；三中心相距仅1–3km，建议把核心半径调小到2–3km。',
+      zonesTitle: '分区 ＝ 广告系列名（可直接改名；两区改成同名即合并为一组）',
+      zonesHint: '第一行红色＝193屏蔽圈（#1），导入 Google Ads 后把它设为<b>排除位置</b>即可屏蔽该区域。「复制」＝复制该区 Campaign + Location 两列，直接粘贴进 Google Ads Editor 的 Make multiple changes 表格。',
+      coordTitle: '坐标检索',
+      coordPlaceholder: '输入或粘贴坐标，例如 21.0115,105.8496',
+      coordSearch: '查找所在圆圈',
+      coordClear: '清除',
+      coordDefault: '会按当前半径、分区模式和手动调整结果判断。',
+      coordHint: '支持模糊粘贴：Google Ads Location、Google Maps 链接、lat/lng 文本、空格/分号分隔、经纬度反序。例如 <b>(3km:21.011500:105.849600)</b>。',
+      exportXlsx: '⬇ 导出 Excel（.xlsx，每区一个工作表）',
+      exportCsv: '⬇ 导出 CSV（全部明细）',
+      exportHint: '导入方法：Google Ads Editor → Keywords &amp; Targeting → <b>Locations</b> → <b>Make multiple changes</b> → 勾选 “My data includes columns for campaigns…” → 粘贴某区的 Campaign+Location 两列 → Process。屏蔽圈请改在 <b>Negative locations（排除位置）</b>里添加同一坐标串。<br>注意：每个广告系列最多 500 个位置定位。',
+      footerHint: '提示：点击地图上任意圆圈，可单独把它改到别的分区（处理边界圈）。鼠标悬停可看编号与归属。',
+      reset: '重置全部调整',
+      blockRadiusLabel: '屏蔽圈半径(193)',
+      outerRadiusLabel: '外围圈半径',
+      radiusHint: '屏蔽圈(红色,#1)固定以 193 Bà Triệu 为圆心；外围圈以它为起点向外蜂窝排布，被屏蔽圈完全盖住的外围圈自动剔除。改半径后立即重画，可在地图上测试不同组合。',
+      allAssigned: '✓ 全部已分配',
+      countMismatch: '⚠ 数量不符！',
+      blockDefaultName: '屏蔽-193 Bà Triệu',
+      copy: '复制',
+      copiedCampaignRows: '已复制「{name}」{n} 行（Campaign+Location）',
+      copiedRows: '已复制「{name}」{n} 行',
+      emptyZone: '该区暂无圆圈',
+      copyFailed: '复制失败，请改用导出 Excel/CSV。',
+      xlsxMissing: 'Excel 组件未加载成功，请刷新页面重试；或先用「导出 CSV」。',
+      coordParseFailed: '无法识别坐标。可输入“纬度,经度”，或粘贴 Google Maps 链接、lat/lng 文本、Google Ads Location 字符串。',
+      coordSearched: '检索坐标：{lat}, {lng}',
+      coordMiss: '未落入任何当前圆圈。',
+      coordNearest: '最近圆圈：#{id} · {name}｜距圆心 {dist}，距圆边约 {edge}',
+      coordHitSummary: '命中 {n} 个圆圈（圆圈重叠时会列出全部）。',
+      coordPopupHit: '命中 {n} 个圆圈：{ids}',
+      coordPopupMiss: '未落入任何当前圆圈',
+      blockCircle: '屏蔽圈/排除位置',
+      adCircleZone: '投放圈 · 当前分区',
+      radius: '半径',
+      distCenter: '距圆心',
+      blockTooltip: '#1 屏蔽圈 · {name}（193 Bà Triệu，{radius}）',
+      centerTooltip: '中心：{name}',
+      manual: '（手动）',
+      reassignCurrent: '圈 #{id}（当前：{name}）',
+      reassignTo: '改到：',
+      confirm: '确定',
+      clearAuto: '恢复自动',
+      rangeHint: '屏蔽圈 1 个（#1＝193 Bà Triệu，{blockRadius}）＋ 外围 {outerCount} 个（{outerRadius}）｜ 由 {seedCount} 个旧1mi圆心定范围',
+      subline: '圈#1＝屏蔽圈：固定以 193 Bà Triệu 为圆心，半径 {blockRadius}（导入后设为排除位置即可屏蔽该区域）。外围投放圈：半径 {outerRadius}，以193为起点蜂窝排布（间距 √3×{outer}≈{spacing}km，行距 {rowSpacing}km），覆盖范围对齐原 {seedCount} 个 1mi 手工圈，编号按离193由近到远。',
+      detailAll: '明细_全部',
+      importAll: '导入_全部',
+      sheetFallback: '区',
+      filePrefix: '河内广告圈_屏蔽{blockRadius}_外围{outerRadius}_{stamp}',
+      gridNames: ['河内-西北','河内-北','河内-东北','河内-西','河内-中心','河内-东','河内-西南','河内-南','河内-东南'],
+      ringNames: ['河内-核心城区','河内-近郊东北','河内-近郊东南','河内-近郊西南','河内-近郊西北','河内-远郊东北','河内-远郊东南','河内-远郊西南','河内-远郊西北'],
+      multiNames: ['Thái Hà-核心','Thái Hà-近郊','Thái Hà-远郊','Xã Đàn-核心','Xã Đàn-近郊','Xã Đàn-远郊','Bà Triệu-核心','Bà Triệu-近郊','Bà Triệu-远郊']
+    },
+    vi: {
+      appTitle: 'Công cụ chia vùng vòng tròn quảng cáo Hà Nội',
+      langLabel: 'Ngôn ngữ',
+      langAuto: 'Tự động',
+      langZh: '中文',
+      langVi: 'Tiếng Việt',
+      totalLabel: 'Tổng vòng',
+      assignedLabel: 'Đã phân vùng',
+      showSeedsPrefix: 'Đối chiếu vòng cũ:',
+      showSeedsLabel: 'Hiển thị tâm vòng 1mi gốc (điểm xám)',
+      modeLabel: 'Chế độ chia vùng',
+      modeGrid: 'Lưới 3×3 theo hướng (Tây Bắc…Trung tâm…Đông Nam)',
+      modeRing: 'Vành đai + hướng (một tâm: lõi/cận đô/xa × 4 hướng)',
+      modeMulti: 'Ba tâm vành đai (theo tâm gần nhất: Thái Hà/Xã Đàn/Bà Triệu)',
+      hlat1Label: 'Ranh Nam/Bắc dưới',
+      hlat2Label: 'Ranh Nam/Bắc trên',
+      vlng1Label: 'Ranh Đông/Tây trái',
+      vlng2Label: 'Ranh Đông/Tây phải',
+      balance: 'Tự cân bằng ranh giới theo số lượng',
+      centerLabel: 'Tâm',
+      r1Label: 'Bán kính lõi km',
+      r2Label: 'Bán kính cận đô km',
+      ringHint: 'Chế độ một tâm: nhóm lõi riêng; ngoài lõi chia theo Đông Bắc/Đông Nam/Tây Nam/Tây Bắc × cận đô/xa.<br>Chế độ ba tâm: mỗi vòng thuộc về tâm gần nhất (Thái Hà / Xã Đàn / Bà Triệu), rồi chia lõi/cận đô/xa, tổng 9 nhóm; ba tâm chỉ cách nhau 1–3km, nên đặt bán kính lõi khoảng 2–3km.',
+      zonesTitle: 'Vùng = tên chiến dịch (có thể đổi tên; đặt trùng tên để gộp vùng)',
+      zonesHint: 'Dòng màu đỏ đầu tiên là vòng chặn 193 (#1). Khi nhập vào Google Ads, hãy đặt nó trong <b>vị trí loại trừ</b>. Nút Sao chép sẽ sao chép hai cột Campaign + Location để dán vào Make multiple changes của Google Ads Editor.',
+      coordTitle: 'Tra cứu tọa độ',
+      coordPlaceholder: 'Nhập hoặc dán tọa độ, ví dụ 21.0115,105.8496',
+      coordSearch: 'Tìm vòng chứa tọa độ',
+      coordClear: 'Xóa',
+      coordDefault: 'Kết quả dùng bán kính, chế độ chia vùng và chỉnh tay hiện tại.',
+      coordHint: 'Hỗ trợ dán linh hoạt: Google Ads Location, link Google Maps, chữ lat/lng, phân tách bằng dấu cách/dấu chấm phẩy, hoặc đảo thứ tự kinh/vĩ độ. Ví dụ <b>(3km:21.011500:105.849600)</b>.',
+      exportXlsx: '⬇ Xuất Excel (.xlsx, mỗi vùng một sheet)',
+      exportCsv: '⬇ Xuất CSV (toàn bộ chi tiết)',
+      exportHint: 'Cách nhập: Google Ads Editor → Keywords &amp; Targeting → <b>Locations</b> → <b>Make multiple changes</b> → chọn “My data includes columns for campaigns…” → dán hai cột Campaign+Location của từng vùng → Process. Vòng chặn cần thêm cùng chuỗi tọa độ trong <b>Negative locations</b>.<br>Lưu ý: mỗi chiến dịch tối đa 500 vị trí nhắm mục tiêu.',
+      footerHint: 'Gợi ý: bấm một vòng bất kỳ trên bản đồ để chuyển riêng vòng đó sang vùng khác. Di chuột để xem mã vòng và vùng.',
+      reset: 'Đặt lại toàn bộ chỉnh sửa',
+      blockRadiusLabel: 'Bán kính chặn (193)',
+      outerRadiusLabel: 'Bán kính vòng ngoài',
+      radiusHint: 'Vòng chặn màu đỏ (#1) cố định tại 193 Bà Triệu; các vòng ngoài được xếp dạng tổ ong từ điểm này. Vòng ngoài bị vòng chặn phủ hoàn toàn sẽ bị loại. Đổi bán kính sẽ vẽ lại ngay.',
+      allAssigned: '✓ Đã phân vùng toàn bộ',
+      countMismatch: '⚠ Số lượng không khớp!',
+      blockDefaultName: 'Chặn-193 Bà Triệu',
+      copy: 'Sao chép',
+      copiedCampaignRows: 'Đã sao chép “{name}” {n} dòng (Campaign+Location)',
+      copiedRows: 'Đã sao chép “{name}” {n} dòng',
+      emptyZone: 'Vùng này chưa có vòng nào',
+      copyFailed: 'Sao chép thất bại, hãy dùng xuất Excel/CSV.',
+      xlsxMissing: 'Thành phần Excel chưa tải được, hãy tải lại trang hoặc dùng xuất CSV.',
+      coordParseFailed: 'Không nhận diện được tọa độ. Có thể nhập “vĩ độ, kinh độ”, hoặc dán link Google Maps, chữ lat/lng, chuỗi Google Ads Location.',
+      coordSearched: 'Tọa độ tra cứu: {lat}, {lng}',
+      coordMiss: 'Không nằm trong vòng hiện tại nào.',
+      coordNearest: 'Vòng gần nhất: #{id} · {name}｜cách tâm {dist}, cách mép vòng khoảng {edge}',
+      coordHitSummary: 'Trúng {n} vòng (nếu các vòng chồng lấn, tất cả sẽ được liệt kê).',
+      coordPopupHit: 'Trúng {n} vòng: {ids}',
+      coordPopupMiss: 'Không nằm trong vòng hiện tại nào',
+      blockCircle: 'Vòng chặn/vị trí loại trừ',
+      adCircleZone: 'Vòng chạy quảng cáo · vùng hiện tại',
+      radius: 'Bán kính',
+      distCenter: 'Cách tâm',
+      blockTooltip: '#1 Vòng chặn · {name} (193 Bà Triệu, {radius})',
+      centerTooltip: 'Tâm: {name}',
+      manual: ' (chỉnh tay)',
+      reassignCurrent: 'Vòng #{id} (hiện tại: {name})',
+      reassignTo: 'Chuyển sang:',
+      confirm: 'Xác nhận',
+      clearAuto: 'Khôi phục tự động',
+      rangeHint: 'Vòng chặn 1 (#1 = 193 Bà Triệu, {blockRadius}) + vòng ngoài {outerCount} ({outerRadius}) | phạm vi lấy từ {seedCount} tâm vòng 1mi cũ',
+      subline: 'Vòng #1 là vòng chặn cố định tại 193 Bà Triệu, bán kính {blockRadius}. Vòng ngoài bán kính {outerRadius}, xếp dạng tổ ong từ điểm 193 (khoảng cách ngang √3×{outer}≈{spacing}km, khoảng cách hàng {rowSpacing}km), phủ phạm vi của {seedCount} vòng 1mi cũ và đánh số theo khoảng cách tới 193.',
+      detailAll: 'Chi_tiet_tat_ca',
+      importAll: 'Nhap_tat_ca',
+      sheetFallback: 'Vung',
+      filePrefix: 'hanoi_ad_circles_block{blockRadius}_outer{outerRadius}_{stamp}',
+      gridNames: ['Ha Noi-Tay Bac','Ha Noi-Bac','Ha Noi-Dong Bac','Ha Noi-Tay','Ha Noi-Trung tam','Ha Noi-Dong','Ha Noi-Tay Nam','Ha Noi-Nam','Ha Noi-Dong Nam'],
+      ringNames: ['Ha Noi-Loi do thi','Ha Noi-Can do Dong Bac','Ha Noi-Can do Dong Nam','Ha Noi-Can do Tay Nam','Ha Noi-Can do Tay Bac','Ha Noi-Xa Dong Bac','Ha Noi-Xa Dong Nam','Ha Noi-Xa Tay Nam','Ha Noi-Xa Tay Bac'],
+      multiNames: ['Thai Ha-Loi','Thai Ha-Can do','Thai Ha-Xa','Xa Dan-Loi','Xa Dan-Can do','Xa Dan-Xa','Ba Trieu-Loi','Ba Trieu-Can do','Ba Trieu-Xa']
+    }
+  };
+  var savedLang = localStorage.getItem('hanoiCircleLang') || 'auto';
+  var currentLang = resolveLang(savedLang);
+  function resolveLang(value){
+    if (value === 'zh' || value === 'vi') return value;
+    var nav = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    return nav.indexOf('vi') === 0 ? 'vi' : 'zh';
+  }
+  function text(key){
+    return (UI[currentLang] && UI[currentLang][key]) || UI.zh[key] || key;
+  }
+  function fmt(key, vars){
+    return String(text(key)).replace(/\{(\w+)\}/g, function(_, k){ return vars && vars[k] !== undefined ? vars[k] : ''; });
+  }
+  function setText(id, value){
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+  function setHtml(id, value){
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = value;
+  }
+  function listText(key){ return text(key).slice(); }
   if (typeof window.HANOI_SEEDS !== 'string') {
-    alert('缺少数据文件：请把本 HTML 与「河内圈_种子数据.js」「河内圈_工具代码.js」放在同一文件夹后重新打开。');
+    alert(currentLang === 'vi' ? 'Thiếu file dữ liệu. Hãy đặt HTML cùng thư mục với các file JS dữ liệu rồi tải lại trang.' : '缺少数据文件：请把本 HTML 与「河内圈_种子数据.js」「河内圈_工具代码.js」放在同一文件夹后重新打开。');
     return;
   }
   // ---------- 半径参数 ----------
@@ -18,13 +194,20 @@
   var KM_LAT = 110.86;
   var KM_LNG = 111.32 * Math.cos(21 * Math.PI / 180);
 
-  document.title = '河内广告圈 · 分区工具（193屏蔽＋蜂窝）';
+  document.title = text('appTitle');
   var h1t = document.getElementById('h1t');
-  if (h1t) h1t.textContent = '河内广告圈 · 分区工具（193屏蔽＋蜂窝）';
+  if (h1t) h1t.textContent = text('appTitle');
 
   function updateSubline(){
     var sub = document.getElementById('subline');
-    if (sub) sub.textContent = '圈#1＝屏蔽圈：固定以 193 Bà Triệu 为圆心，半径 ' + rlabel(R_BLOCK) + '（导入后设为排除位置即可屏蔽该区域）。外围投放圈：半径 ' + rlabel(R_OUTER) + '，以193为起点蜂窝排布（间距 √3×' + R_OUTER + '≈' + (Math.sqrt(3) * R_OUTER).toFixed(2) + 'km，行距 ' + (1.5 * R_OUTER).toFixed(2) + 'km），覆盖范围对齐原 498 个 1mi 手工圈，编号按离193由近到远。';
+    if (sub) sub.textContent = fmt('subline', {
+      blockRadius: rlabel(R_BLOCK),
+      outerRadius: rlabel(R_OUTER),
+      outer: R_OUTER,
+      spacing: (Math.sqrt(3) * R_OUTER).toFixed(2),
+      rowSpacing: (1.5 * R_OUTER).toFixed(2),
+      seedCount: seeds.length
+    });
   }
 
   // ---------- 解析旧1mi圆心（覆盖范围种子） ----------
@@ -60,9 +243,9 @@
       }).join('');
     }
     card.innerHTML =
-      '<div class="row"><label style="width:110px">屏蔽圈半径(193)</label><select id="blockSel">' + optionsHtml(R_BLOCK) + '</select></div>' +
-      '<div class="row"><label style="width:110px">外围圈半径</label><select id="outerSel">' + optionsHtml(R_OUTER) + '</select></div>' +
-      '<div class="hint">屏蔽圈(红色,#1)固定以 193 Bà Triệu 为圆心；外围圈以它为起点向外蜂窝排布，被屏蔽圈完全盖住的外围圈自动剔除。改半径后立即重画，可在地图上测试不同组合。</div>';
+      '<div class="row"><label id="blockSelLabel" style="width:110px"></label><select id="blockSel">' + optionsHtml(R_BLOCK) + '</select></div>' +
+      '<div class="row"><label id="outerSelLabel" style="width:110px"></label><select id="outerSel">' + optionsHtml(R_OUTER) + '</select></div>' +
+      '<div class="hint" id="radiusHint"></div>';
     modeCard.parentNode.insertBefore(card, modeCard);
   })();
 
@@ -117,8 +300,12 @@
     latMin = Math.min.apply(null, lats); latMax = Math.max.apply(null, lats);
     lngMin = Math.min.apply(null, lngs); lngMax = Math.max.apply(null, lngs);
     document.getElementById('total').textContent = (pts.length + 1);
-    document.getElementById('rangehint').textContent =
-      '屏蔽圈 1 个（#1＝193 Bà Triệu，' + rlabel(R_BLOCK) + '）＋ 外围 ' + pts.length + ' 个（' + rlabel(R_OUTER) + '）｜ 由 ' + seeds.length + ' 个旧1mi圆心定范围';
+    document.getElementById('rangehint').textContent = fmt('rangeHint', {
+      blockRadius: rlabel(R_BLOCK),
+      outerCount: pts.length,
+      outerRadius: rlabel(R_OUTER),
+      seedCount: seeds.length
+    });
     updateSubline();
   }
 
@@ -131,25 +318,89 @@
   var centerIdx = 0;
   var COLORS = ['#e6194B','#3cb44b','#4363d8','#f58231','#911eb4','#00a5cf','#f032e6','#7f8c00','#9A6324'];
   var BLOCK_COLOR = '#c5221f';
-  var GRID_NAMES = ['河内-西北','河内-北','河内-东北','河内-西','河内-中心','河内-东','河内-西南','河内-南','河内-东南'];
-  var RING_NAMES = ['河内-核心城区','河内-近郊东北','河内-近郊东南','河内-近郊西南','河内-近郊西北','河内-远郊东北','河内-远郊东南','河内-远郊西南','河内-远郊西北'];
-  var MULTI_NAMES = ['Thái Hà-核心','Thái Hà-近郊','Thái Hà-远郊','Xã Đàn-核心','Xã Đàn-近郊','Xã Đàn-远郊','Bà Triệu-核心','Bà Triệu-近郊','Bà Triệu-远郊'];
-  var BLOCK_DEFAULT_NAME = '屏蔽-193 Bà Triệu';
 
   var G = { hlat1: 0, hlat2: 0, vlng1: 0, vlng2: 0 };
   var R = { r1: 8, r2: 20 };
   var mode = 'grid';
   var campaign = {};
 
-  function defNames(){ return mode === 'grid' ? GRID_NAMES : (mode === 'ring' ? RING_NAMES : MULTI_NAMES); }
+  function defNames(){ return mode === 'grid' ? listText('gridNames') : (mode === 'ring' ? listText('ringNames') : listText('multiNames')); }
   function curName(zi){
     var k = mode + '_' + zi;
     return (campaign[k] !== undefined && campaign[k] !== '') ? campaign[k] : defNames()[zi];
   }
   function blockName(){
-    return (campaign.block !== undefined && campaign.block !== '') ? campaign.block : BLOCK_DEFAULT_NAME;
+    return (campaign.block !== undefined && campaign.block !== '') ? campaign.block : text('blockDefaultName');
   }
   function colorFor(zi){ return COLORS[zi % COLORS.length]; }
+
+  function updateStaticText(){
+    document.documentElement.lang = currentLang === 'vi' ? 'vi' : 'zh-CN';
+    document.title = text('appTitle');
+    setText('h1t', text('appTitle'));
+    setText('langLabel', text('langLabel'));
+    setText('modeLabel', text('modeLabel'));
+    setText('modeOptGrid', text('modeGrid'));
+    setText('modeOptRing', text('modeRing'));
+    setText('modeOptMulti', text('modeMulti'));
+    setText('hlat1Label', text('hlat1Label'));
+    setText('hlat2Label', text('hlat2Label'));
+    setText('vlng1Label', text('vlng1Label'));
+    setText('vlng2Label', text('vlng2Label'));
+    setText('balance', text('balance'));
+    setText('centerLabel', text('centerLabel'));
+    setText('r1Label', text('r1Label'));
+    setText('r2Label', text('r2Label'));
+    setHtml('ringHint', text('ringHint'));
+    setText('zonesTitle', text('zonesTitle'));
+    setHtml('zonesHint', text('zonesHint'));
+    setText('coordTitle', text('coordTitle'));
+    setText('coordSearch', text('coordSearch'));
+    setText('coordClear', text('coordClear'));
+    setHtml('coordHint', text('coordHint'));
+    setText('exportXlsx', text('exportXlsx'));
+    setText('exportCsv', text('exportCsv'));
+    setHtml('exportHint', text('exportHint'));
+    setText('footerHint', text('footerHint'));
+    setText('reset', text('reset'));
+    setText('blockSelLabel', text('blockRadiusLabel'));
+    setText('outerSelLabel', text('outerRadiusLabel'));
+    setText('radiusHint', text('radiusHint'));
+    var langSel = document.getElementById('langSel');
+    if (langSel) {
+      langSel.value = savedLang;
+      var opts = langSel.options;
+      if (opts[0]) opts[0].textContent = text('langAuto');
+      if (opts[1]) opts[1].textContent = text('langZh');
+      if (opts[2]) opts[2].textContent = text('langVi');
+    }
+    var coordInput = document.getElementById('coordInput');
+    if (coordInput) coordInput.placeholder = text('coordPlaceholder');
+    var result = document.getElementById('coordResult');
+    if (result && !lastCoordQuery) result.textContent = text('coordDefault');
+    var stat = document.getElementById('statLine');
+    if (stat) {
+      var total = document.getElementById('total');
+      var assigned = document.getElementById('assigned');
+      var totalValue = total ? total.textContent : '0';
+      var assignedValue = assigned ? assigned.textContent : '0';
+      var check = document.getElementById('checkmark');
+      var checkValue = check ? check.innerHTML : '';
+      stat.innerHTML = text('totalLabel') + ' <b id="total">' + totalValue + '</b> ｜ ' + text('assignedLabel') + ' <b id="assigned">' + assignedValue + '</b> <span id="checkmark">' + checkValue + '</span>';
+    }
+    var showSeeds = document.getElementById('showSeedsHint');
+    if (showSeeds) showSeeds.firstChild.nodeValue = text('showSeedsPrefix');
+    setText('showSeedsLabel', text('showSeedsLabel'));
+    updateSubline();
+    if (pts.length) {
+      document.getElementById('rangehint').textContent = fmt('rangeHint', {
+        blockRadius: rlabel(R_BLOCK),
+        outerCount: pts.length,
+        outerRadius: rlabel(R_OUTER),
+        seedCount: seeds.length
+      });
+    }
+  }
 
   // ---------- 分区逻辑 ----------
   function quantile(sorted, q){
@@ -229,12 +480,12 @@
       var C = CENTERS[centerIdx];
       L.circle([C.lat, C.lng], { radius: R.r1 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
       L.circle([C.lat, C.lng], { radius: R.r2 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
-      L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip('中心：' + C.name).addTo(lineLayer);
+      L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip(fmt('centerTooltip', { name: C.name })).addTo(lineLayer);
     } else {
       CENTERS.forEach(function(C){
         L.circle([C.lat, C.lng], { radius: R.r1 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
         L.circle([C.lat, C.lng], { radius: R.r2 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
-        L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip('中心：' + C.name).addTo(lineLayer);
+        L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip(fmt('centerTooltip', { name: C.name })).addTo(lineLayer);
       });
     }
   }
@@ -242,7 +493,7 @@
   function render(){
     circleLayer.clearLayers();
     var bc = L.circle([blockPt.lat, blockPt.lng], { radius: blockPt.r * 1000, color: BLOCK_COLOR, weight: 2.5, fillColor: BLOCK_COLOR, fillOpacity: 0.18, dashArray: '4,4' });
-    bc.bindTooltip('#1 屏蔽圈 · ' + blockName() + '（193 Bà Triệu，' + rlabel(blockPt.r) + '）', { sticky: true });
+    bc.bindTooltip(fmt('blockTooltip', { name: blockName(), radius: rlabel(blockPt.r) }), { sticky: true });
     circleLayer.addLayer(bc);
     circleLayer.addLayer(L.circleMarker([blockPt.lat, blockPt.lng], { radius: 4, color: BLOCK_COLOR, fillColor: BLOCK_COLOR, fillOpacity: 1 }));
     var counts = [0,0,0,0,0,0,0,0,0];
@@ -252,7 +503,7 @@
         counts[zi]++;
         var col = colorFor(zi);
         var c = L.circle([p.lat, p.lng], { radius: p.r * 1000, color: col, weight: 1, fillColor: col, fillOpacity: 0.3 });
-        c.bindTooltip('#' + p.id + ' · ' + curName(zi) + (p.override !== null ? '（手动）' : ''), { sticky: true });
+        c.bindTooltip('#' + p.id + ' · ' + curName(zi) + (p.override !== null ? text('manual') : ''), { sticky: true });
         c.on('click', function(){ openReassign(p); });
         circleLayer.addLayer(c);
       })(pts[i]);
@@ -260,7 +511,7 @@
     var assigned = counts.reduce(function(a,b){ return a + b; }, 0) + 1;
     document.getElementById('assigned').textContent = assigned;
     document.getElementById('checkmark').innerHTML = (assigned === pts.length + 1)
-      ? '<span class="ok">✓ 全部已分配</span>' : '<span class="warn">⚠ 数量不符！</span>';
+      ? '<span class="ok">' + text('allAssigned') + '</span>' : '<span class="warn">' + text('countMismatch') + '</span>';
     drawLines();
     renderZones(counts);
     refreshCoordSearch();
@@ -275,7 +526,7 @@
     binp.addEventListener('input', function(){ campaign.block = binp.value; });
     bdiv.appendChild(binp);
     var bcnt = document.createElement('span'); bcnt.className = 'cnt'; bcnt.textContent = '1'; bdiv.appendChild(bcnt);
-    var bcp = document.createElement('button'); bcp.className = 'mini'; bcp.textContent = '复制';
+    var bcp = document.createElement('button'); bcp.className = 'mini'; bcp.textContent = text('copy');
     bcp.addEventListener('click', function(){ copyBlock(); });
     bdiv.appendChild(bcp);
     box.appendChild(bdiv);
@@ -289,7 +540,7 @@
         var cnt = document.createElement('span'); cnt.className = 'cnt'; cnt.textContent = counts[z];
         if (counts[z] > 500) cnt.style.color = '#c5221f';
         div.appendChild(cnt);
-        var cp = document.createElement('button'); cp.className = 'mini'; cp.textContent = '复制';
+        var cp = document.createElement('button'); cp.className = 'mini'; cp.textContent = text('copy');
         cp.addEventListener('click', function(){ copyZone(z); });
         div.appendChild(cp);
         box.appendChild(div);
@@ -299,9 +550,9 @@
 
   function openReassign(p){
     var zi = assignZone(p);
-    var html = '<div style="font-size:12px">圈 #' + p.id + '（当前：' + curName(zi) + '）<br>改到：<select id="reSel" style="margin-top:4px">';
+    var html = '<div style="font-size:12px">' + fmt('reassignCurrent', { id: p.id, name: curName(zi) }) + '<br>' + text('reassignTo') + ' <select id="reSel" style="margin-top:4px">';
     for (var z = 0; z < 9; z++) html += '<option value="' + z + '"' + (z === zi ? ' selected' : '') + '>' + curName(z) + '</option>';
-    html += '</select><br><button id="reBtn" class="mini" style="margin-top:6px">确定</button> <button id="reClr" class="mini" style="margin-top:6px">恢复自动</button></div>';
+    html += '</select><br><button id="reBtn" class="mini" style="margin-top:6px">' + text('confirm') + '</button> <button id="reClr" class="mini" style="margin-top:6px">' + text('clearAuto') + '</button></div>';
     var pop = L.popup().setLatLng([p.lat, p.lng]).setContent(html).openOn(map);
     setTimeout(function(){
       var b = document.getElementById('reBtn');
@@ -314,44 +565,46 @@
   // ---------- 导出 ----------
   function locStr(p){ return '(' + rlabel(p.r) + ':' + p.lat.toFixed(6) + ':' + p.lng.toFixed(6) + ')'; }
   function buildRows(){
-    var rows = [{ ID: 1, 分区: blockName(), Campaign: blockName(), Location: locStr(blockPt), Latitude: blockPt.lat, Longitude: blockPt.lng }];
+    var rows = [{ ID: 1, Zone: blockName(), Campaign: blockName(), Location: locStr(blockPt), Latitude: blockPt.lat, Longitude: blockPt.lng }];
     pts.forEach(function(p){
       var zi = assignZone(p);
-      rows.push({ ID: p.id, 分区: curName(zi), Campaign: curName(zi), Location: locStr(p), Latitude: p.lat, Longitude: p.lng });
+      rows.push({ ID: p.id, Zone: curName(zi), Campaign: curName(zi), Location: locStr(p), Latitude: p.lat, Longitude: p.lng });
     });
     return rows;
   }
   function sanitizeSheet(name, used){
-    var s = String(name || '区').replace(/[\[\]\:\*\?\/\\]/g, ' ').trim().slice(0, 28) || '区';
+    var s = String(name || text('sheetFallback')).replace(/[\[\]\:\*\?\/\\]/g, ' ').trim().slice(0, 28) || text('sheetFallback');
     var base = s, k = 1;
     while (used[s]) s = base + '_' + (k++);
     used[s] = true; return s;
   }
   function exportXlsx(){
-    if (typeof XLSX === 'undefined') { alert('Excel 组件未加载成功，请确认联网后刷新页面重试；或先用「导出 CSV」。'); return; }
+    if (typeof XLSX === 'undefined') { alert(text('xlsxMissing')); return; }
     var rows = buildRows();
     var wb = XLSX.utils.book_new();
-    var ws = XLSX.utils.json_to_sheet(rows, { header: ['ID','分区','Campaign','Location','Latitude','Longitude'] });
-    XLSX.utils.book_append_sheet(wb, ws, '明细_全部');
+    var ws = XLSX.utils.json_to_sheet(rows, { header: ['ID','Zone','Campaign','Location','Latitude','Longitude'] });
+    XLSX.utils.book_append_sheet(wb, ws, text('detailAll'));
     var imp = rows.map(function(r){ return { Campaign: r.Campaign, Location: r.Location }; });
-    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(imp, { header: ['Campaign','Location'] }), '导入_全部');
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(imp, { header: ['Campaign','Location'] }), text('importAll'));
     var groups = {};
     rows.forEach(function(r){ (groups[r.Campaign] = groups[r.Campaign] || []).push(r); });
-    var used = { '明细_全部': true, '导入_全部': true };
+    var used = {};
+    used[text('detailAll')] = true;
+    used[text('importAll')] = true;
     Object.keys(groups).forEach(function(g){
       var gr = groups[g].map(function(r){ return { Campaign: r.Campaign, Location: r.Location }; });
       XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(gr, { header: ['Campaign','Location'] }), sanitizeSheet(g, used));
     });
-    XLSX.writeFile(wb, '河内广告圈_屏蔽' + rlabel(R_BLOCK) + '_外围' + rlabel(R_OUTER) + '_' + stamp() + '.xlsx');
+    XLSX.writeFile(wb, fmt('filePrefix', { blockRadius: rlabel(R_BLOCK), outerRadius: rlabel(R_OUTER), stamp: stamp() }) + '.xlsx');
   }
   function exportCsv(){
     var rows = buildRows();
-    var head = ['ID','分区','Campaign','Location','Latitude','Longitude'];
+    var head = ['ID','Zone','Campaign','Location','Latitude','Longitude'];
     var lines = [head.join(',')];
     rows.forEach(function(r){
-      lines.push([r.ID, q(r.分区), q(r.Campaign), q(r.Location), r.Latitude, r.Longitude].join(','));
+      lines.push([r.ID, q(r.Zone), q(r.Campaign), q(r.Location), r.Latitude, r.Longitude].join(','));
     });
-    dl(new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' }), '河内广告圈_屏蔽' + rlabel(R_BLOCK) + '_外围' + rlabel(R_OUTER) + '_' + stamp() + '.csv');
+    dl(new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8' }), fmt('filePrefix', { blockRadius: rlabel(R_BLOCK), outerRadius: rlabel(R_OUTER), stamp: stamp() }) + '.csv');
   }
   function copyBlock(){
     var tsv = 'Campaign\tLocation\n' + blockName() + '\t' + locStr(blockPt);
@@ -360,14 +613,14 @@
   function copyZone(zi){
     var name = curName(zi);
     var rows = pts.filter(function(p){ return assignZone(p) === zi; });
-    if (!rows.length) { flash('该区暂无圆圈'); return; }
+    if (!rows.length) { flash(text('emptyZone')); return; }
     var tsv = 'Campaign\tLocation\n' + rows.map(function(p){ return name + '\t' + locStr(p); }).join('\n');
     doCopy(tsv, name, rows.length);
   }
   function doCopy(tsv, name, n){
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(tsv).then(
-        function(){ flash('已复制「' + name + '」' + n + ' 行（Campaign+Location）'); },
+        function(){ flash(fmt('copiedCampaignRows', { name: name, n: n })); },
         function(){ fallbackCopy(tsv, name, n); }
       );
     } else { fallbackCopy(tsv, name, n); }
@@ -376,8 +629,8 @@
     var ta = document.createElement('textarea');
     ta.value = text; ta.style.cssText = 'position:fixed;left:-9999px;';
     document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); flash('已复制「' + name + '」' + n + ' 行'); }
-    catch(e){ alert('复制失败，请改用导出 Excel/CSV。'); }
+    try { document.execCommand('copy'); flash(fmt('copiedRows', { name: name, n: n })); }
+    catch(e){ alert(text('copyFailed')); }
     ta.remove();
   }
   function q(s){ s = String(s); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
@@ -397,26 +650,40 @@
   // ---------- 坐标检索 ----------
   function isLat(v){ return isFinite(v) && Math.abs(v) <= 90; }
   function isLng(v){ return isFinite(v) && Math.abs(v) <= 180; }
+  function hanoiScore(p){
+    var midLat = 20.98, midLng = 105.8;
+    return Math.abs(p.lat - midLat) * 2 + Math.abs(p.lng - midLng);
+  }
   function asLatLng(a, b){
     if (isLat(a) && isLng(b)) return { lat: a, lng: b };
-    if (isLat(b) && isLng(a)) return { lat: b, lng: a };
+    if (isLat(b) && isLng(a)) return { lat: b, lng: a, swapped: true };
     return null;
   }
   function parseCoordInput(text){
-    var nums = (String(text || '').match(/-?\d+(?:\.\d+)?/g) || []).map(function(n){ return parseFloat(n); });
+    var source = String(text || '').trim();
+    var lower = source.toLowerCase();
+    var nums = (source.match(/-?\d+(?:\.\d+)?/g) || []).map(function(n){ return parseFloat(n); });
     if (nums.length < 2) return null;
-    var pairs = [];
+    var pairs = [], labeled;
+    labeled = lower.match(/(?:lat|latitude|vĩ\s*độ|vi\s*do|纬度)\D*(-?\d+(?:\.\d+)?)[\s\S]{0,80}?(?:lng|lon|long|longitude|kinh\s*độ|kinh\s*do|经度)\D*(-?\d+(?:\.\d+)?)/i);
+    if (labeled) pairs.push([parseFloat(labeled[1]), parseFloat(labeled[2])]);
+    labeled = lower.match(/(?:lng|lon|long|longitude|kinh\s*độ|kinh\s*do|经度)\D*(-?\d+(?:\.\d+)?)[\s\S]{0,80}?(?:lat|latitude|vĩ\s*độ|vi\s*do|纬度)\D*(-?\d+(?:\.\d+)?)/i);
+    if (labeled) pairs.push([parseFloat(labeled[1]), parseFloat(labeled[2])]);
     if (nums.length >= 3) {
       if (Math.abs(nums[0]) <= 10) pairs.push([nums[1], nums[2]]);
       pairs.push([nums[nums.length - 2], nums[nums.length - 1]]);
       pairs.push([nums[1], nums[2]]);
     }
     pairs.push([nums[0], nums[1]]);
+    for (var n = 0; n < nums.length - 1; n++) pairs.push([nums[n], nums[n + 1]]);
+    var best = null;
     for (var i = 0; i < pairs.length; i++) {
       var p = asLatLng(pairs[i][0], pairs[i][1]);
-      if (p) return p;
+      if (!p) continue;
+      var score = hanoiScore(p);
+      if (!best || score < best.score) best = { point: p, score: score };
     }
-    return null;
+    return best ? best.point : null;
   }
   function circleInfoForPoint(lat, lng){
     var hits = [];
@@ -467,25 +734,25 @@
     if (!box) return;
     box.innerHTML = '';
     var head = document.createElement('div');
-    head.textContent = '检索坐标：' + lat.toFixed(6) + ', ' + lng.toFixed(6);
+    head.textContent = fmt('coordSearched', { lat: lat.toFixed(6), lng: lng.toFixed(6) });
     box.appendChild(head);
     if (!hits.length) {
       var miss = document.createElement('div');
       miss.className = 'warn';
-      miss.textContent = '未落入任何当前圆圈。';
+      miss.textContent = text('coordMiss');
       box.appendChild(miss);
       if (nearest) {
         var near = document.createElement('div');
         near.className = 'coord-hit';
         near.style.borderColor = nearest.color;
-        near.textContent = '最近圆圈：#' + nearest.point.id + ' · ' + nearest.name + '｜距圆心 ' + formatKm(nearest.dist) + '，距圆边约 ' + formatKm(nearest.edge);
+        near.textContent = fmt('coordNearest', { id: nearest.point.id, name: nearest.name, dist: formatKm(nearest.dist), edge: formatKm(nearest.edge) });
         box.appendChild(near);
       }
       return;
     }
     var summary = document.createElement('div');
     summary.className = 'ok';
-    summary.textContent = '命中 ' + hits.length + ' 个圆圈（圆圈重叠时会列出全部）。';
+    summary.textContent = fmt('coordHitSummary', { n: hits.length });
     box.appendChild(summary);
     hits.forEach(function(hit){
       var div = document.createElement('div');
@@ -496,9 +763,9 @@
       div.appendChild(title);
       var meta = document.createElement('div');
       meta.textContent =
-        (hit.isBlock ? '屏蔽圈/排除位置' : '投放圈 · 当前分区') +
-        '｜半径 ' + rlabel(hit.point.r) +
-        '｜距圆心 ' + formatKm(hit.dist) +
+        (hit.isBlock ? text('blockCircle') : text('adCircleZone')) +
+        '｜' + text('radius') + ' ' + rlabel(hit.point.r) +
+        '｜' + text('distCenter') + ' ' + formatKm(hit.dist) +
         '｜' + locStr(hit.point);
       div.appendChild(meta);
       box.appendChild(div);
@@ -514,8 +781,8 @@
       fillOpacity: 1
     }).addTo(searchLayer);
     var popupText = hits.length
-      ? ('命中 ' + hits.length + ' 个圆圈：' + hits.map(function(h){ return '#' + h.point.id; }).join(', '))
-      : '未落入任何当前圆圈';
+      ? fmt('coordPopupHit', { n: hits.length, ids: hits.map(function(h){ return '#' + h.point.id; }).join(', ') })
+      : text('coordPopupMiss');
     marker.bindPopup(popupText).openPopup();
     var bounds = L.latLngBounds([[lat, lng], [lat, lng]]);
     hits.forEach(function(hit){
@@ -542,7 +809,7 @@
     if (!parsed) {
       lastCoordQuery = null;
       searchLayer.clearLayers();
-      result.innerHTML = '<span class="warn">无法识别坐标。请输入“纬度,经度”，或粘贴类似 (3km:21.011500:105.849600) 的 Location 字符串。</span>';
+      result.innerHTML = '<span class="warn">' + text('coordParseFailed') + '</span>';
       return;
     }
     lastCoordQuery = parsed;
@@ -560,7 +827,7 @@
     var input = document.getElementById('coordInput');
     var result = document.getElementById('coordResult');
     if (input) input.value = '';
-    if (result) result.textContent = '会按当前半径、分区模式和手动调整结果判断。';
+    if (result) result.textContent = text('coordDefault');
   }
 
   // ---------- 滑块 ----------
@@ -636,6 +903,13 @@
   document.getElementById('coordInput').addEventListener('keydown', function(e){
     if (e.key === 'Enter') runCoordSearch(true);
   });
+  document.getElementById('langSel').addEventListener('change', function(e){
+    savedLang = e.target.value;
+    localStorage.setItem('hanoiCircleLang', savedLang);
+    currentLang = resolveLang(savedLang);
+    updateStaticText();
+    render();
+  });
   document.getElementById('reset').addEventListener('click', function(){
     campaign = {};
     R = { r1: 8, r2: 20 }; centerIdx = 0;
@@ -648,6 +922,7 @@
   });
 
   // ---------- 启动 ----------
+  updateStaticText();
   generate();
   balanceGrid();
   initGridSliders();

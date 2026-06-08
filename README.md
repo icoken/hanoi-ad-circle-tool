@@ -6,8 +6,13 @@ Static GitHub Pages deployment for the Hanoi advertising circle zoning tool.
 
 - `index.html`: GitHub Pages entry page.
 - `河内圈_种子数据.js`: seed coordinate data.
-- `河内圈_工具代码.js`: map, zoning, export, and coordinate lookup logic.
+- `河内圈_工具代码.js`: map, zoning, export, coordinate lookup, and language switching logic.
 - `vendor/`: local Leaflet and SheetJS assets so Excel export does not depend on CDN loading.
+
+## Features
+
+- Chinese/Vietnamese UI, with automatic language detection and a manual language selector.
+- Fuzzy coordinate lookup from plain coordinates, Google Ads Location strings, Google Maps URLs, lat/lng labels, Vietnamese coordinate labels, and reversed longitude/latitude order.
 
 ## Deploy With GitHub Pages
 

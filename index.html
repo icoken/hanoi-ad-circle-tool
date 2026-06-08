@@ -37,6 +37,7 @@
   .coord-result{font-size:12px;line-height:1.55;margin-top:8px;color:#333;}
   .coord-hit{padding:6px 7px;border:1px solid #e2e5ea;border-radius:6px;margin-top:6px;background:#fafbfc;}
   .coord-hit b{font-size:13px;}
+  .lang-card{padding:8px 10px;}
 </style>
 </head>
 <body>
@@ -46,66 +47,76 @@
     <h1 id="h1t">河内广告圈 · 分区工具</h1>
     <div class="sub" id="subline"></div>
 
-    <div class="card">
-      <div class="stat">总圈数 <b id="total">0</b> ｜ 已分配 <b id="assigned">0</b> <span id="checkmark"></span></div>
-      <div class="hint" id="rangehint"></div>
-      <div class="hint">显示旧圈对照：<label style="color:#444"><input type="checkbox" id="showSeeds"> 叠加显示原1mi圆心(灰点)</label></div>
+    <div class="card lang-card">
+      <div class="row"><label id="langLabel">语言</label>
+        <select id="langSel">
+          <option value="auto">自动</option>
+          <option value="zh">中文</option>
+          <option value="vi">Tiếng Việt</option>
+        </select>
+      </div>
     </div>
 
     <div class="card">
-      <div class="row"><label>分区模式</label>
+      <div class="stat" id="statLine">总圈数 <b id="total">0</b> ｜ 已分配 <b id="assigned">0</b> <span id="checkmark"></span></div>
+      <div class="hint" id="rangehint"></div>
+      <div class="hint" id="showSeedsHint">显示旧圈对照：<label style="color:#444"><input type="checkbox" id="showSeeds"> <span id="showSeedsLabel">叠加显示原1mi圆心(灰点)</span></label></div>
+    </div>
+
+    <div class="card">
+      <div class="row"><label id="modeLabel">分区模式</label>
         <select id="mode">
-          <option value="grid">方位 3×3 网格（西北…中心…东南）</option>
-          <option value="ring">圈层＋方位（单中心：核心/近郊/远郊×四向）</option>
-          <option value="multi">三中心圈层（按最近中心：Thái Hà/Xã Đàn/Bà Triệu）</option>
+          <option value="grid" id="modeOptGrid">方位 3×3 网格（西北…中心…东南）</option>
+          <option value="ring" id="modeOptRing">圈层＋方位（单中心：核心/近郊/远郊×四向）</option>
+          <option value="multi" id="modeOptMulti">三中心圈层（按最近中心：Thái Hà/Xã Đàn/Bà Triệu）</option>
         </select>
       </div>
       <div id="gridctrl">
-        <div class="row"><label style="width:80px">南北分界·下</label><input type="range" id="hlat1"><span class="val" id="hlat1v"></span></div>
-        <div class="row"><label style="width:80px">南北分界·上</label><input type="range" id="hlat2"><span class="val" id="hlat2v"></span></div>
-        <div class="row"><label style="width:80px">东西分界·左</label><input type="range" id="vlng1"><span class="val" id="vlng1v"></span></div>
-        <div class="row"><label style="width:80px">东西分界·右</label><input type="range" id="vlng2"><span class="val" id="vlng2v"></span></div>
+        <div class="row"><label id="hlat1Label" style="width:80px">南北分界·下</label><input type="range" id="hlat1"><span class="val" id="hlat1v"></span></div>
+        <div class="row"><label id="hlat2Label" style="width:80px">南北分界·上</label><input type="range" id="hlat2"><span class="val" id="hlat2v"></span></div>
+        <div class="row"><label id="vlng1Label" style="width:80px">东西分界·左</label><input type="range" id="vlng1"><span class="val" id="vlng1v"></span></div>
+        <div class="row"><label id="vlng2Label" style="width:80px">东西分界·右</label><input type="range" id="vlng2"><span class="val" id="vlng2v"></span></div>
         <button class="mini" id="balance">按数量自动均衡分界线</button>
       </div>
       <div id="ringctrl" style="display:none">
-        <div class="row" id="centerRow"><label>圆心</label>
+        <div class="row" id="centerRow"><label id="centerLabel">圆心</label>
           <select id="centerSel">
             <option value="0">11 Thái Hà（Đống Đa）</option>
             <option value="1">380 Xã Đàn</option>
             <option value="2">193 Bà Triệu（Vincom）</option>
           </select>
         </div>
-        <div class="row"><label style="width:80px">核心半径 km</label><input type="range" id="r1"><span class="val" id="r1v"></span></div>
-        <div class="row"><label style="width:80px">近郊半径 km</label><input type="range" id="r2"><span class="val" id="r2v"></span></div>
-        <div class="hint">单中心模式：按上方所选圆心，核心一组，核心以外按 东北/东南/西南/西北 ×（近郊/远郊）分组。<br>三中心模式：每个圈划给最近的中心（Thái Hà / Xã Đàn / Bà Triệu），再按 核心/近郊/远郊 分档，共9组；三中心相距仅1–3km，建议把核心半径调小到2–3km。</div>
+        <div class="row"><label id="r1Label" style="width:80px">核心半径 km</label><input type="range" id="r1"><span class="val" id="r1v"></span></div>
+        <div class="row"><label id="r2Label" style="width:80px">近郊半径 km</label><input type="range" id="r2"><span class="val" id="r2v"></span></div>
+        <div class="hint" id="ringHint">单中心模式：按上方所选圆心，核心一组，核心以外按 东北/东南/西南/西北 ×（近郊/远郊）分组。<br>三中心模式：每个圈划给最近的中心（Thái Hà / Xã Đàn / Bà Triệu），再按 核心/近郊/远郊 分档，共9组；三中心相距仅1–3km，建议把核心半径调小到2–3km。</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="sect">分区 ＝ 广告系列名（可直接改名；两区改成同名即合并为一组）</div>
+      <div class="sect" id="zonesTitle">分区 ＝ 广告系列名（可直接改名；两区改成同名即合并为一组）</div>
       <div id="zones"></div>
-      <div class="hint">第一行红色＝193屏蔽圈（#1），导入 Google Ads 后把它设为<b>排除位置</b>即可屏蔽该区域。「复制」＝复制该区 Campaign + Location 两列，直接粘贴进 Google Ads Editor 的 Make multiple changes 表格。</div>
+      <div class="hint" id="zonesHint">第一行红色＝193屏蔽圈（#1），导入 Google Ads 后把它设为<b>排除位置</b>即可屏蔽该区域。「复制」＝复制该区 Campaign + Location 两列，直接粘贴进 Google Ads Editor 的 Make multiple changes 表格。</div>
     </div>
 
     <div class="card">
-      <div class="sect">坐标检索</div>
+      <div class="sect" id="coordTitle">坐标检索</div>
       <input class="coord-input" id="coordInput" type="text" placeholder="输入纬度,经度，例如 21.0115,105.8496"/>
       <div class="row">
         <button class="mini" id="coordSearch">查找所在圆圈</button>
         <button class="mini" id="coordClear">清除</button>
       </div>
       <div class="coord-result" id="coordResult">会按当前半径、分区模式和手动调整结果判断。</div>
-      <div class="hint">也可以直接粘贴 Google Ads 的 Location 字符串，例如 <b>(3km:21.011500:105.849600)</b>。</div>
+      <div class="hint" id="coordHint">也可以直接粘贴 Google Ads 的 Location 字符串，例如 <b>(3km:21.011500:105.849600)</b>。</div>
     </div>
 
     <div class="card">
       <button class="btn" id="exportXlsx">⬇ 导出 Excel（.xlsx，每区一个工作表）</button>
       <button class="btn sec" id="exportCsv">⬇ 导出 CSV（全部明细）</button>
-      <div class="hint">导入方法：Google Ads Editor → Keywords &amp; Targeting → <b>Locations</b> → <b>Make multiple changes</b> → 勾选 “My data includes columns for campaigns…” → 粘贴某区的 Campaign+Location 两列 → Process。屏蔽圈请改在 <b>Negative locations（排除位置）</b>里添加同一坐标串。<br>注意：每个广告系列最多 500 个位置定位。</div>
+      <div class="hint" id="exportHint">导入方法：Google Ads Editor → Keywords &amp; Targeting → <b>Locations</b> → <b>Make multiple changes</b> → 勾选 “My data includes columns for campaigns…” → 粘贴某区的 Campaign+Location 两列 → Process。屏蔽圈请改在 <b>Negative locations（排除位置）</b>里添加同一坐标串。<br>注意：每个广告系列最多 500 个位置定位。</div>
     </div>
 
     <div class="card">
-      <div class="hint" style="margin-top:0">提示：点击地图上任意圆圈，可单独把它改到别的分区（处理边界圈）。鼠标悬停可看编号与归属。本文件需与「河内圈_种子数据.js」「河内圈_工具代码.js」放在同一文件夹。</div>
+      <div class="hint" id="footerHint" style="margin-top:0">提示：点击地图上任意圆圈，可单独把它改到别的分区（处理边界圈）。鼠标悬停可看编号与归属。本文件需与「河内圈_种子数据.js」「河内圈_工具代码.js」放在同一文件夹。</div>
       <button class="btn ghost" id="reset">重置全部调整</button>
     </div>
   </div>
