@@ -2,7 +2,7 @@
   "use strict";
   var UI = {
     zh: {
-      appTitle: '河内广告圈 · 分区工具（193屏蔽＋蜂窝）',
+      appTitle: '河内广告圈 · 分区工具（{anchor}屏蔽＋蜂窝）',
       langLabel: '语言',
       langAuto: '自动',
       langZh: '中文',
@@ -25,7 +25,7 @@
       r2Label: '近郊半径 km',
       ringHint: '单中心模式：按上方所选圆心，核心一组，核心以外按 东北/东南/西南/西北 ×（近郊/远郊）分组。<br>三中心模式：每个圈划给最近的中心（Thái Hà / Xã Đàn / Bà Triệu），再按 核心/近郊/远郊 分档，共9组；三中心相距仅1–3km，建议把核心半径调小到2–3km。',
       zonesTitle: '分区 ＝ 广告系列名（可直接改名；两区改成同名即合并为一组）',
-      zonesHint: '第一行红色＝193屏蔽圈（#1）；第二行红色＝可自选多个外围圈组成的附加屏蔽组。点击地图圆圈可加入/移出附加屏蔽组。导入 Google Ads 后请把屏蔽组设为<b>排除位置</b>。「复制」＝复制该区 Campaign + Location 两列。',
+      zonesHint: '第一行红色＝{anchor}屏蔽圈（#1）；第二行红色＝可自选多个外围圈组成的附加屏蔽组。点击地图圆圈可加入/移出附加屏蔽组。导入 Google Ads 后请把屏蔽组设为<b>排除位置</b>。「复制」＝复制该区 Campaign + Location 两列。',
       coordTitle: '坐标检索',
       coordPlaceholder: '输入或粘贴坐标，例如 21.0115,105.8496',
       coordSearch: '查找所在圆圈',
@@ -37,12 +37,12 @@
       exportHint: '导入方法：Google Ads Editor → Keywords &amp; Targeting → <b>Locations</b> → <b>Make multiple changes</b> → 勾选 “My data includes columns for campaigns…” → 粘贴某区的 Campaign+Location 两列 → Process。屏蔽圈请改在 <b>Negative locations（排除位置）</b>里添加同一坐标串。<br>注意：每个广告系列最多 500 个位置定位。',
       footerHint: '提示：点击地图上任意圆圈，可单独把它改到别的分区（处理边界圈）。鼠标悬停可看编号与归属。',
       reset: '重置全部调整',
-      blockRadiusLabel: '屏蔽圈半径(193)',
+      blockRadiusLabel: '屏蔽圈半径',
       outerRadiusLabel: '外围圈半径',
-      radiusHint: '屏蔽圈(红色,#1)固定以 193 Bà Triệu 为圆心；外围圈以它为起点向外蜂窝排布，被屏蔽圈完全盖住的外围圈自动剔除。改半径后立即重画，可在地图上测试不同组合。',
+      radiusHint: '屏蔽圈(红色,#1)固定以 {anchor} 为圆心；外围圈以它为起点向外蜂窝排布，被屏蔽圈完全盖住的外围圈自动剔除。改半径后立即重画，可在地图上测试不同组合。',
       allAssigned: '✓ 全部已分配',
       countMismatch: '⚠ 数量不符！',
-      blockDefaultName: '屏蔽-193 Bà Triệu',
+      blockDefaultName: '屏蔽-{anchor}',
       extraBlockDefaultName: '屏蔽-附加圈',
       copy: '复制',
       copyLocation: '复制坐标',
@@ -68,7 +68,7 @@
       adCircleZone: '投放圈 · 当前分区',
       radius: '半径',
       distCenter: '距圆心',
-      blockTooltip: '#1 屏蔽圈 · {name}（193 Bà Triệu，{radius}）',
+      blockTooltip: '#1 屏蔽圈 · {name}（{anchor}，{radius}）',
       circleTooltip: '#{id} · {name}{manual}<br>{location}',
       centerTooltip: '中心：{name}',
       manual: '（手动）',
@@ -76,8 +76,8 @@
       reassignTo: '改到：',
       confirm: '确定',
       clearAuto: '恢复自动',
-      rangeHint: '屏蔽圈 1 个（#1＝193 Bà Triệu，{blockRadius}）＋ 外围 {outerCount} 个（{outerRadius}）｜ 由 {seedCount} 个旧1mi圆心定范围',
-      subline: '圈#1＝屏蔽圈：固定以 193 Bà Triệu 为圆心，半径 {blockRadius}（导入后设为排除位置即可屏蔽该区域）。外围投放圈：半径 {outerRadius}，以193为起点蜂窝排布（间距 √3×{outer}≈{spacing}km，行距 {rowSpacing}km），覆盖范围对齐原 {seedCount} 个 1mi 手工圈，编号按离193由近到远。',
+      rangeHint: '屏蔽圈 1 个（#1＝{anchor}，{blockRadius}）＋ 外围 {outerCount} 个（{outerRadius}）｜ 由 {seedCount} 个旧1mi圆心定范围',
+      subline: '圈#1＝屏蔽圈：固定以 {anchor} 为圆心，半径 {blockRadius}（导入后设为排除位置即可屏蔽该区域）。外围投放圈：半径 {outerRadius}，以此圆心为起点蜂窝排布（间距 √3×{outer}≈{spacing}km，行距 {rowSpacing}km），覆盖范围对齐原 {seedCount} 个 1mi 手工圈，编号按离屏蔽圆心由近到远。',
       detailAll: '明细_全部',
       importAll: '导入_全部',
       sheetFallback: '区',
@@ -87,7 +87,7 @@
       multiNames: ['Thái Hà-核心','Thái Hà-近郊','Thái Hà-远郊','Xã Đàn-核心','Xã Đàn-近郊','Xã Đàn-远郊','Bà Triệu-核心','Bà Triệu-近郊','Bà Triệu-远郊']
     },
     vi: {
-      appTitle: 'Công cụ chia vùng vòng tròn quảng cáo Hà Nội',
+      appTitle: 'Công cụ chia vùng vòng tròn quảng cáo Hà Nội ({anchor})',
       langLabel: 'Ngôn ngữ',
       langAuto: 'Tự động',
       langZh: '中文',
@@ -110,7 +110,7 @@
       r2Label: 'Bán kính cận đô km',
       ringHint: 'Chế độ một tâm: nhóm lõi riêng; ngoài lõi chia theo Đông Bắc/Đông Nam/Tây Nam/Tây Bắc × cận đô/xa.<br>Chế độ ba tâm: mỗi vòng thuộc về tâm gần nhất (Thái Hà / Xã Đàn / Bà Triệu), rồi chia lõi/cận đô/xa, tổng 9 nhóm; ba tâm chỉ cách nhau 1–3km, nên đặt bán kính lõi khoảng 2–3km.',
       zonesTitle: 'Vùng = tên chiến dịch (có thể đổi tên; đặt trùng tên để gộp vùng)',
-      zonesHint: 'Dòng đỏ đầu tiên là vòng chặn 193 (#1); dòng đỏ thứ hai là nhóm chặn bổ sung do bạn tự chọn từ các vòng ngoài. Bấm vòng trên bản đồ để thêm/bỏ khỏi nhóm chặn bổ sung. Khi nhập vào Google Ads, hãy đặt các nhóm chặn trong <b>vị trí loại trừ</b>. Nút Sao chép sẽ sao chép hai cột Campaign + Location.',
+      zonesHint: 'Dòng đỏ đầu tiên là vòng chặn {anchor} (#1); dòng đỏ thứ hai là nhóm chặn bổ sung do bạn tự chọn từ các vòng ngoài. Bấm vòng trên bản đồ để thêm/bỏ khỏi nhóm chặn bổ sung. Khi nhập vào Google Ads, hãy đặt các nhóm chặn trong <b>vị trí loại trừ</b>. Nút Sao chép sẽ sao chép hai cột Campaign + Location.',
       coordTitle: 'Tra cứu tọa độ',
       coordPlaceholder: 'Nhập hoặc dán tọa độ, ví dụ 21.0115,105.8496',
       coordSearch: 'Tìm vòng chứa tọa độ',
@@ -122,12 +122,12 @@
       exportHint: 'Cách nhập: Google Ads Editor → Keywords &amp; Targeting → <b>Locations</b> → <b>Make multiple changes</b> → chọn “My data includes columns for campaigns…” → dán hai cột Campaign+Location của từng vùng → Process. Vòng chặn cần thêm cùng chuỗi tọa độ trong <b>Negative locations</b>.<br>Lưu ý: mỗi chiến dịch tối đa 500 vị trí nhắm mục tiêu.',
       footerHint: 'Gợi ý: bấm một vòng bất kỳ trên bản đồ để chuyển riêng vòng đó sang vùng khác. Di chuột để xem mã vòng và vùng.',
       reset: 'Đặt lại toàn bộ chỉnh sửa',
-      blockRadiusLabel: 'Bán kính chặn (193)',
+      blockRadiusLabel: 'Bán kính chặn',
       outerRadiusLabel: 'Bán kính vòng ngoài',
-      radiusHint: 'Vòng chặn màu đỏ (#1) cố định tại 193 Bà Triệu; các vòng ngoài được xếp dạng tổ ong từ điểm này. Vòng ngoài bị vòng chặn phủ hoàn toàn sẽ bị loại. Đổi bán kính sẽ vẽ lại ngay.',
+      radiusHint: 'Vòng chặn màu đỏ (#1) cố định tại {anchor}; các vòng ngoài được xếp dạng tổ ong từ điểm này. Vòng ngoài bị vòng chặn phủ hoàn toàn sẽ bị loại. Đổi bán kính sẽ vẽ lại ngay.',
       allAssigned: '✓ Đã phân vùng toàn bộ',
       countMismatch: '⚠ Số lượng không khớp!',
-      blockDefaultName: 'Chặn-193 Bà Triệu',
+      blockDefaultName: 'Chặn-{anchor}',
       extraBlockDefaultName: 'Chặn-bổ sung',
       copy: 'Sao chép',
       copyLocation: 'Sao chép tọa độ',
@@ -153,7 +153,7 @@
       adCircleZone: 'Vòng chạy quảng cáo · vùng hiện tại',
       radius: 'Bán kính',
       distCenter: 'Cách tâm',
-      blockTooltip: '#1 Vòng chặn · {name} (193 Bà Triệu, {radius})',
+      blockTooltip: '#1 Vòng chặn · {name} ({anchor}, {radius})',
       circleTooltip: '#{id} · {name}{manual}<br>{location}',
       centerTooltip: 'Tâm: {name}',
       manual: ' (chỉnh tay)',
@@ -161,8 +161,8 @@
       reassignTo: 'Chuyển sang:',
       confirm: 'Xác nhận',
       clearAuto: 'Khôi phục tự động',
-      rangeHint: 'Vòng chặn 1 (#1 = 193 Bà Triệu, {blockRadius}) + vòng ngoài {outerCount} ({outerRadius}) | phạm vi lấy từ {seedCount} tâm vòng 1mi cũ',
-      subline: 'Vòng #1 là vòng chặn cố định tại 193 Bà Triệu, bán kính {blockRadius}. Vòng ngoài bán kính {outerRadius}, xếp dạng tổ ong từ điểm 193 (khoảng cách ngang √3×{outer}≈{spacing}km, khoảng cách hàng {rowSpacing}km), phủ phạm vi của {seedCount} vòng 1mi cũ và đánh số theo khoảng cách tới 193.',
+      rangeHint: 'Vòng chặn 1 (#1 = {anchor}, {blockRadius}) + vòng ngoài {outerCount} ({outerRadius}) | phạm vi lấy từ {seedCount} tâm vòng 1mi cũ',
+      subline: 'Vòng #1 là vòng chặn cố định tại {anchor}, bán kính {blockRadius}. Vòng ngoài bán kính {outerRadius}, xếp dạng tổ ong từ tâm này (khoảng cách ngang √3×{outer}≈{spacing}km, khoảng cách hàng {rowSpacing}km), phủ phạm vi của {seedCount} vòng 1mi cũ và đánh số theo khoảng cách tới tâm chặn.',
       detailAll: 'Chi_tiet_tat_ca',
       importAll: 'Nhap_tat_ca',
       sheetFallback: 'Vung',
@@ -202,30 +202,69 @@
   var R_OUTER_INIT = (typeof window.R_CIRCLE === 'number' && window.R_CIRCLE > 0) ? window.R_CIRCLE : 3;
   var R_BLOCK_INIT = (typeof window.R_BLOCK === 'number' && window.R_BLOCK > 0) ? window.R_BLOCK : 3;
   var R_OUTER = R_OUTER_INIT;   // 外围投放圈半径 km
-  var R_BLOCK = R_BLOCK_INIT;   // 193屏蔽圈半径 km
-  var RADIUS_OPTIONS = [2, 2.5, 3, 3.5, 4, 4.5, 5];
+  var R_BLOCK = R_BLOCK_INIT;   // 屏蔽圈半径 km
+  var RADIUS_OPTIONS = [2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8];
   function rlabel(r){ return (r % 1 === 0 ? String(Math.round(r)) : String(r)) + 'km'; }
 
-  // ---------- 固定锚点：193 Bà Triệu（圈#1=屏蔽圈圆心，蜂窝由此起铺） ----------
-  var C193 = { name: '193 Bà Triệu', lat: 21.0115, lng: 105.8496 };
+  // ---------- 锚点：圈#1=屏蔽圈圆心，蜂窝由此起铺 ----------
+  var DEFAULT_ANCHOR = { name: '193 Bà Triệu', lat: 21.0115, lng: 105.8496 };
+  function normalizeAnchor(src){
+    if (!src || typeof src !== 'object') return DEFAULT_ANCHOR;
+    var lat = parseFloat(src.lat);
+    var lng = parseFloat(src.lng);
+    if (!isFinite(lat) || !isFinite(lng)) return DEFAULT_ANCHOR;
+    return {
+      name: src.name || src.nameZh || DEFAULT_ANCHOR.name,
+      nameZh: src.nameZh || src.name || DEFAULT_ANCHOR.name,
+      nameVi: src.nameVi || src.name || src.nameZh || DEFAULT_ANCHOR.name,
+      label: src.label || null,
+      labelZh: src.labelZh || null,
+      labelVi: src.labelVi || null,
+      lat: lat,
+      lng: lng
+    };
+  }
+  var ANCHOR = normalizeAnchor(window.HANOI_ANCHOR);
+  function anchorName(){
+    return currentLang === 'vi' ? (ANCHOR.nameVi || ANCHOR.name) : (ANCHOR.nameZh || ANCHOR.name);
+  }
+  function anchorLabel(){
+    var label = currentLang === 'vi' ? (ANCHOR.labelVi || ANCHOR.label) : (ANCHOR.labelZh || ANCHOR.label);
+    return label || anchorName();
+  }
+  function anchorVars(){
+    return {
+      anchor: anchorName(),
+      anchorLabel: anchorLabel(),
+      anchorLat: ANCHOR.lat.toFixed(6),
+      anchorLng: ANCHOR.lng.toFixed(6)
+    };
+  }
+  function withAnchor(vars){
+    var out = anchorVars();
+    vars = vars || {};
+    Object.keys(vars).forEach(function(k){ out[k] = vars[k]; });
+    return out;
+  }
+  function appTitleText(){ return fmt('appTitle', anchorVars()); }
 
   var KM_LAT = 110.86;
   var KM_LNG = 111.32 * Math.cos(21 * Math.PI / 180);
 
-  document.title = text('appTitle');
+  document.title = appTitleText();
   var h1t = document.getElementById('h1t');
-  if (h1t) h1t.textContent = text('appTitle');
+  if (h1t) h1t.textContent = appTitleText();
 
   function updateSubline(){
     var sub = document.getElementById('subline');
-    if (sub) sub.textContent = fmt('subline', {
+    if (sub) sub.textContent = fmt('subline', withAnchor({
       blockRadius: rlabel(R_BLOCK),
       outerRadius: rlabel(R_OUTER),
       outer: R_OUTER,
       spacing: (Math.sqrt(3) * R_OUTER).toFixed(2),
       rowSpacing: (1.5 * R_OUTER).toFixed(2),
       seedCount: seeds.length
-    });
+    }));
   }
 
   // ---------- 解析旧1mi圆心（覆盖范围种子） ----------
@@ -290,20 +329,20 @@
   function generate(){
     var dLat = 1.5 * R_OUTER / KM_LAT;
     var dLng = Math.sqrt(3) * R_OUTER / KM_LNG;
-    var iMin = Math.floor((sLatMin - dLat - C193.lat) / dLat);
-    var iMax = Math.ceil((sLatMax + dLat - C193.lat) / dLat);
-    var jMin = Math.floor((sLngMin - dLng - C193.lng) / dLng);
-    var jMax = Math.ceil((sLngMax + dLng - C193.lng) / dLng);
+    var iMin = Math.floor((sLatMin - dLat - ANCHOR.lat) / dLat);
+    var iMax = Math.ceil((sLatMax + dLat - ANCHOR.lat) / dLat);
+    var jMin = Math.floor((sLngMin - dLng - ANCHOR.lng) / dLng);
+    var jMax = Math.ceil((sLngMax + dLng - ANCHOR.lng) / dLng);
     var out = [];
     for (var i = iMin; i <= iMax; i++) {
-      var la = C193.lat + i * dLat;
+      var la = ANCHOR.lat + i * dLat;
       var odd = ((i % 2) + 2) % 2 === 1;
       var off = odd ? 0.5 : 0;
       for (var j = jMin; j <= jMax; j++) {
-        var lo = C193.lng + (j + off) * dLng;
+        var lo = ANCHOR.lng + (j + off) * dLng;
         if (i === 0 && j === 0) continue;
         if (!nearSeed(la, lo)) continue;
-        var dC = distKmRaw(la, lo, C193.lat, C193.lng);
+        var dC = distKmRaw(la, lo, ANCHOR.lat, ANCHOR.lng);
         if (dC + R_OUTER <= R_BLOCK + 1e-9) continue;
         out.push({ lat: la, lng: lo, dC: dC });
       }
@@ -312,29 +351,57 @@
     pts = out.map(function(o, idx){
       return { id: idx + 2, lat: +o.lat.toFixed(6), lng: +o.lng.toFixed(6), r: R_OUTER, override: null, extraBlock: false };
     });
-    blockPt = { id: 1, lat: +C193.lat.toFixed(6), lng: +C193.lng.toFixed(6), r: R_BLOCK, blocked: true };
+    blockPt = { id: 1, lat: +ANCHOR.lat.toFixed(6), lng: +ANCHOR.lng.toFixed(6), r: R_BLOCK, blocked: true };
     lats = pts.map(function(p){ return p.lat; });
     lngs = pts.map(function(p){ return p.lng; });
     latMin = Math.min.apply(null, lats); latMax = Math.max.apply(null, lats);
     lngMin = Math.min.apply(null, lngs); lngMax = Math.max.apply(null, lngs);
     document.getElementById('total').textContent = (pts.length + 1);
-    document.getElementById('rangehint').textContent = fmt('rangeHint', {
+    document.getElementById('rangehint').textContent = fmt('rangeHint', withAnchor({
       blockRadius: rlabel(R_BLOCK),
       outerCount: pts.length,
       outerRadius: rlabel(R_OUTER),
       seedCount: seeds.length
-    });
+    }));
     updateSubline();
   }
 
   // ---------- 配置 ----------
-  var CENTERS = [
-    { name: '11 Thái Hà',   lat: 21.0107, lng: 105.8223 },
-    { name: '380 Xã Đàn',   lat: 21.0151, lng: 105.8335 },
-    { name: '193 Bà Triệu', lat: 21.0115, lng: 105.8496 }
+  var MULTI_CENTERS = [
+    { name: '11 Thái Hà', label: '11 Thái Hà（Đống Đa）', lat: 21.0107, lng: 105.8223 },
+    { name: '380 Xã Đàn', label: '380 Xã Đàn', lat: 21.0151, lng: 105.8335 },
+    { name: '193 Bà Triệu', label: '193 Bà Triệu（Vincom）', lat: 21.0115, lng: 105.8496 }
   ];
-  var DEFAULT_MODE = 'ring';
+  var CENTERS = MULTI_CENTERS.slice();
+  function sameCenter(a, b){
+    return Math.abs(a.lat - b.lat) < 0.000001 && Math.abs(a.lng - b.lng) < 0.000001;
+  }
   var DEFAULT_CENTER_IDX = 2;
+  if (window.HANOI_DEFAULT_RING_CENTER === 'anchor') {
+    DEFAULT_CENTER_IDX = CENTERS.findIndex(function(c){ return sameCenter(c, ANCHOR); });
+    if (DEFAULT_CENTER_IDX < 0) {
+      CENTERS.push({
+        name: anchorName(),
+        label: anchorLabel(),
+        anchor: true,
+        lat: ANCHOR.lat,
+        lng: ANCHOR.lng
+      });
+      DEFAULT_CENTER_IDX = CENTERS.length - 1;
+    }
+  } else if (typeof window.HANOI_DEFAULT_CENTER_IDX === 'number' && CENTERS[window.HANOI_DEFAULT_CENTER_IDX]) {
+    DEFAULT_CENTER_IDX = window.HANOI_DEFAULT_CENTER_IDX;
+  }
+  function populateCenterSelect(){
+    var sel = document.getElementById('centerSel');
+    if (!sel) return;
+    sel.innerHTML = CENTERS.map(function(c, idx){
+      var label = c.anchor ? anchorLabel() : (c.label || c.name);
+      return '<option value="' + idx + '">' + label + '</option>';
+    }).join('');
+    sel.value = String(centerIdx);
+  }
+  var DEFAULT_MODE = 'ring';
   var DEFAULT_R = { r1: 3, r2: 20 };
   var centerIdx = DEFAULT_CENTER_IDX;
   var COLORS = ['#e6194B','#3cb44b','#4363d8','#f58231','#911eb4','#00a5cf','#f032e6','#7f8c00','#9A6324'];
@@ -351,17 +418,19 @@
     return (campaign[k] !== undefined && campaign[k] !== '') ? campaign[k] : defNames()[zi];
   }
   function blockName(){
-    return (campaign.block !== undefined && campaign.block !== '') ? campaign.block : text('blockDefaultName');
+    return (campaign.block !== undefined && campaign.block !== '') ? campaign.block : fmt('blockDefaultName', anchorVars());
   }
   function extraBlockName(){
     return (campaign.extraBlock !== undefined && campaign.extraBlock !== '') ? campaign.extraBlock : text('extraBlockDefaultName');
   }
   function colorFor(zi){ return COLORS[zi % COLORS.length]; }
+  function centerDisplayName(C){ return C.anchor ? anchorName() : C.name; }
 
   function updateStaticText(){
     document.documentElement.lang = currentLang === 'vi' ? 'vi' : 'zh-CN';
-    document.title = text('appTitle');
-    setText('h1t', text('appTitle'));
+    populateCenterSelect();
+    document.title = appTitleText();
+    setText('h1t', appTitleText());
     setText('langLabel', text('langLabel'));
     setText('modeLabel', text('modeLabel'));
     setText('modeOptGrid', text('modeGrid'));
@@ -377,7 +446,7 @@
     setText('r2Label', text('r2Label'));
     setHtml('ringHint', text('ringHint'));
     setText('zonesTitle', text('zonesTitle'));
-    setHtml('zonesHint', text('zonesHint'));
+    setHtml('zonesHint', fmt('zonesHint', anchorVars()));
     setText('coordTitle', text('coordTitle'));
     setText('coordSearch', text('coordSearch'));
     setText('coordClear', text('coordClear'));
@@ -387,9 +456,9 @@
     setHtml('exportHint', text('exportHint'));
     setText('footerHint', text('footerHint'));
     setText('reset', text('reset'));
-    setText('blockSelLabel', text('blockRadiusLabel'));
+    setText('blockSelLabel', fmt('blockRadiusLabel', anchorVars()));
     setText('outerSelLabel', text('outerRadiusLabel'));
-    setText('radiusHint', text('radiusHint'));
+    setText('radiusHint', fmt('radiusHint', anchorVars()));
     var langSel = document.getElementById('langSel');
     if (langSel) {
       langSel.value = savedLang;
@@ -417,12 +486,12 @@
     setText('showSeedsLabel', text('showSeedsLabel'));
     updateSubline();
     if (pts.length) {
-      document.getElementById('rangehint').textContent = fmt('rangeHint', {
+      document.getElementById('rangehint').textContent = fmt('rangeHint', withAnchor({
         blockRadius: rlabel(R_BLOCK),
         outerCount: pts.length,
         outerRadius: rlabel(R_OUTER),
         seedCount: seeds.length
-      });
+      }));
     }
   }
 
@@ -458,8 +527,8 @@
   }
   function assignMulti(lat, lng){
     var best = 0, bd = Infinity;
-    for (var ci = 0; ci < CENTERS.length; ci++) {
-      var d = distKm(lat, lng, CENTERS[ci]);
+    for (var ci = 0; ci < MULTI_CENTERS.length; ci++) {
+      var d = distKm(lat, lng, MULTI_CENTERS[ci]);
       if (d < bd) { bd = d; best = ci; }
     }
     return best * 3 + (bd < R.r1 ? 0 : (bd < R.r2 ? 1 : 2));
@@ -504,12 +573,12 @@
       var C = CENTERS[centerIdx];
       L.circle([C.lat, C.lng], { radius: R.r1 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
       L.circle([C.lat, C.lng], { radius: R.r2 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
-      L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip(fmt('centerTooltip', { name: C.name })).addTo(lineLayer);
+      L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip(fmt('centerTooltip', { name: centerDisplayName(C) })).addTo(lineLayer);
     } else {
-      CENTERS.forEach(function(C){
+      MULTI_CENTERS.forEach(function(C){
         L.circle([C.lat, C.lng], { radius: R.r1 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
         L.circle([C.lat, C.lng], { radius: R.r2 * 1000, color:'#222', weight:1.5, fill:false, dashArray:'6,5' }).addTo(lineLayer);
-        L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip(fmt('centerTooltip', { name: C.name })).addTo(lineLayer);
+        L.circleMarker([C.lat, C.lng], { radius:5, color:'#c5221f', fillColor:'#c5221f', fillOpacity:1 }).bindTooltip(fmt('centerTooltip', { name: centerDisplayName(C) })).addTo(lineLayer);
       });
     }
   }
@@ -517,7 +586,7 @@
   function render(){
     circleLayer.clearLayers();
     var bc = L.circle([blockPt.lat, blockPt.lng], { radius: blockPt.r * 1000, color: BLOCK_COLOR, weight: 2.5, fillColor: BLOCK_COLOR, fillOpacity: 0.18, dashArray: '4,4' });
-    bc.bindTooltip(fmt('blockTooltip', { name: blockName(), radius: rlabel(blockPt.r) }), { sticky: true });
+    bc.bindTooltip(fmt('blockTooltip', withAnchor({ name: blockName(), radius: rlabel(blockPt.r) })), { sticky: true });
     circleLayer.addLayer(bc);
     circleLayer.addLayer(L.circleMarker([blockPt.lat, blockPt.lng], { radius: 4, color: BLOCK_COLOR, fillColor: BLOCK_COLOR, fillOpacity: 1 }));
     var counts = [0,0,0,0,0,0,0,0,0];
