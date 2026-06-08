@@ -201,8 +201,13 @@
   // ---------- 半径参数 ----------
   var R_OUTER_INIT = (typeof window.R_CIRCLE === 'number' && window.R_CIRCLE > 0) ? window.R_CIRCLE : 3;
   var R_BLOCK_INIT = (typeof window.R_BLOCK === 'number' && window.R_BLOCK > 0) ? window.R_BLOCK : 3;
+  var SYNC_RADII = window.HANOI_SYNC_RADII === true;
   var R_OUTER = R_OUTER_INIT;   // 外围投放圈半径 km
   var R_BLOCK = R_BLOCK_INIT;   // 屏蔽圈半径 km
+  if (SYNC_RADII) {
+    R_OUTER_INIT = R_BLOCK_INIT;
+    R_OUTER = R_BLOCK;
+  }
   var RADIUS_OPTIONS = [2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8];
   function rlabel(r){ return (r % 1 === 0 ? String(Math.round(r)) : String(r)) + 'km'; }
 
@@ -1093,12 +1098,20 @@
     refreshGridSliderBounds();
     render();
   }
+  function syncRadiusSelects(){
+    document.getElementById('blockSel').value = String(R_BLOCK);
+    document.getElementById('outerSel').value = String(R_OUTER);
+  }
   document.getElementById('blockSel').addEventListener('change', function(e){
     R_BLOCK = parseFloat(e.target.value);
+    if (SYNC_RADII) R_OUTER = R_BLOCK;
+    syncRadiusSelects();
     regenerateAll();
   });
   document.getElementById('outerSel').addEventListener('change', function(e){
     R_OUTER = parseFloat(e.target.value);
+    if (SYNC_RADII) R_BLOCK = R_OUTER;
+    syncRadiusSelects();
     regenerateAll();
   });
   document.getElementById('mode').addEventListener('change', function(e){
@@ -1133,8 +1146,8 @@
     centerIdx = DEFAULT_CENTER_IDX;
     mode = DEFAULT_MODE;
     R_BLOCK = R_BLOCK_INIT; R_OUTER = R_OUTER_INIT;
-    document.getElementById('blockSel').value = String(R_BLOCK);
-    document.getElementById('outerSel').value = String(R_OUTER);
+    if (SYNC_RADII) R_OUTER = R_BLOCK;
+    syncRadiusSelects();
     syncModeControls();
     syncRingSliders();
     regenerateAll();
