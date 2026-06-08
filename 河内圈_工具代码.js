@@ -315,13 +315,16 @@
     { name: '380 Xã Đàn',   lat: 21.0151, lng: 105.8335 },
     { name: '193 Bà Triệu', lat: 21.0115, lng: 105.8496 }
   ];
-  var centerIdx = 0;
+  var DEFAULT_MODE = 'ring';
+  var DEFAULT_CENTER_IDX = 2;
+  var DEFAULT_R = { r1: 3, r2: 20 };
+  var centerIdx = DEFAULT_CENTER_IDX;
   var COLORS = ['#e6194B','#3cb44b','#4363d8','#f58231','#911eb4','#00a5cf','#f032e6','#7f8c00','#9A6324'];
   var BLOCK_COLOR = '#c5221f';
 
   var G = { hlat1: 0, hlat2: 0, vlng1: 0, vlng2: 0 };
-  var R = { r1: 8, r2: 20 };
-  var mode = 'grid';
+  var R = { r1: DEFAULT_R.r1, r2: DEFAULT_R.r2 };
+  var mode = DEFAULT_MODE;
   var campaign = {};
 
   function defNames(){ return mode === 'grid' ? listText('gridNames') : (mode === 'ring' ? listText('ringNames') : listText('multiNames')); }
@@ -866,6 +869,13 @@
     var e1 = document.getElementById('r1'); e1.value = R.r1; document.getElementById('r1v').textContent = f1(R.r1);
     var e2 = document.getElementById('r2'); e2.value = R.r2; document.getElementById('r2v').textContent = f1(R.r2);
   }
+  function syncModeControls(){
+    document.getElementById('mode').value = mode;
+    document.getElementById('centerSel').value = String(centerIdx);
+    document.getElementById('gridctrl').style.display = mode === 'grid' ? 'block' : 'none';
+    document.getElementById('ringctrl').style.display = mode === 'grid' ? 'none' : 'block';
+    document.getElementById('centerRow').style.display = mode === 'ring' ? 'flex' : 'none';
+  }
 
   // ---------- 事件 ----------
   function regenerateAll(){
@@ -885,9 +895,7 @@
   document.getElementById('mode').addEventListener('change', function(e){
     mode = e.target.value;
     pts.forEach(function(p){ p.override = null; });
-    document.getElementById('gridctrl').style.display = mode === 'grid' ? 'block' : 'none';
-    document.getElementById('ringctrl').style.display = mode === 'grid' ? 'none' : 'block';
-    document.getElementById('centerRow').style.display = mode === 'ring' ? 'flex' : 'none';
+    syncModeControls();
     render();
   });
   document.getElementById('centerSel').addEventListener('change', function(e){
@@ -912,11 +920,13 @@
   });
   document.getElementById('reset').addEventListener('click', function(){
     campaign = {};
-    R = { r1: 8, r2: 20 }; centerIdx = 0;
-    document.getElementById('centerSel').value = '0';
+    R = { r1: DEFAULT_R.r1, r2: DEFAULT_R.r2 };
+    centerIdx = DEFAULT_CENTER_IDX;
+    mode = DEFAULT_MODE;
     R_BLOCK = R_BLOCK_INIT; R_OUTER = R_OUTER_INIT;
     document.getElementById('blockSel').value = String(R_BLOCK);
     document.getElementById('outerSel').value = String(R_OUTER);
+    syncModeControls();
     syncRingSliders();
     regenerateAll();
   });
@@ -927,6 +937,7 @@
   balanceGrid();
   initGridSliders();
   initRingSliders();
+  syncModeControls();
   map.fitBounds([[latMin, lngMin], [latMax, lngMax]], { padding: [20, 20] });
   render();
 })();
