@@ -124,8 +124,8 @@
 <script src="vendor/leaflet/leaflet.js"></script>
 <script src="vendor/xlsx/xlsx.full.min.js"></script>
 <script>
-window.R_CIRCLE = 2.5;
-window.R_BLOCK = 2.5;
+window.R_CIRCLE = 2;
+window.R_BLOCK = 2;
 window.HANOI_SYNC_RADII = true;
 window.HANOI_PAGE_TITLE_ZH = '河内广告圈 · 分区工具（小圈组合屏蔽）';
 window.HANOI_PAGE_TITLE_VI = 'Công cụ chia vùng vòng tròn quảng cáo Hà Nội (nhóm vòng chặn nhỏ)';
@@ -140,10 +140,11 @@ window.HANOI_ANCHOR = {
   lat: 21.030049,
   lng: 105.848092
 };
-window.HANOI_BLOCK_CIRCLES = [
-  { nameZh: '来源西北', nameVi: 'Nguồn Tây Bắc', lat: 21.057110, lng: 105.831425 },
-  { nameZh: '来源东南', nameVi: 'Nguồn Đông Nam', lat: 21.002987, lng: 105.864758 },
-  { nameZh: '来源西南', nameVi: 'Nguồn Tây Nam', lat: 21.002987, lng: 105.831425 }
+window.HANOI_BLOCK_HEXES = [
+  { nameZh: '来源中间', nameVi: 'Nguồn trung tâm', i: 0, j: 0 },
+  { nameZh: '来源西北', nameVi: 'Nguồn Tây Bắc', i: 1, j: -1 },
+  { nameZh: '来源西南', nameVi: 'Nguồn Tây Nam', i: -1, j: -1 },
+  { nameZh: '来源东南', nameVi: 'Nguồn Đông Nam', i: -1, j: 0 }
 ];
 window.HANOI_DEFAULT_RING_CENTER = 'anchor';
 </script>

@@ -275,10 +275,27 @@
       lng: lng
     };
   }
+  function normalizeBlockHex(src, idx){
+    if (!src || typeof src !== 'object') return null;
+    var i = parseInt(src.i, 10);
+    var j = parseInt(src.j, 10);
+    if (!isFinite(i) || !isFinite(j)) return null;
+    var fallback = anchorName() + '-' + (idx + 1);
+    return {
+      i: i,
+      j: j,
+      name: src.name || src.nameZh || fallback,
+      nameZh: src.nameZh || src.name || fallback,
+      nameVi: src.nameVi || src.name || src.nameZh || fallback
+    };
+  }
+  var BLOCK_HEXES = Array.isArray(window.HANOI_BLOCK_HEXES)
+    ? window.HANOI_BLOCK_HEXES.map(normalizeBlockHex).filter(Boolean)
+    : [];
   var BLOCK_CONFIGS = Array.isArray(window.HANOI_BLOCK_CIRCLES)
     ? window.HANOI_BLOCK_CIRCLES.map(normalizeBlockConfig).filter(Boolean)
     : [];
-  if (!BLOCK_CONFIGS.length) {
+  if (!BLOCK_HEXES.length && !BLOCK_CONFIGS.length) {
     BLOCK_CONFIGS = [normalizeBlockConfig({ name: anchorName(), nameZh: ANCHOR.nameZh, nameVi: ANCHOR.nameVi, lat: ANCHOR.lat, lng: ANCHOR.lng }, 0)];
   }
 
@@ -292,7 +309,7 @@
   function updateSubline(){
     var sub = document.getElementById('subline');
     if (sub) sub.textContent = fmt('subline', withAnchor({
-      blockCount: blockPts.length || BLOCK_CONFIGS.length,
+      blockCount: blockPts.length || BLOCK_HEXES.length || BLOCK_CONFIGS.length,
       blockRadius: rlabel(R_BLOCK),
       outerRadius: rlabel(R_OUTER),
       outer: R_OUTER,
@@ -361,15 +378,41 @@
     }
     return false;
   }
+  function hexLngOffset(i){
+    return (((i % 2) + 2) % 2 === 1) ? 0.5 : 0;
+  }
+  function makeBlockPoint(src, idx, dLat, dLng){
+    var lat = src.lat;
+    var lng = src.lng;
+    if (src.i !== undefined && src.j !== undefined) {
+      lat = ANCHOR.lat + src.i * dLat;
+      lng = ANCHOR.lng + (src.j + hexLngOffset(src.i)) * dLng;
+    }
+    return {
+      id: idx + 1,
+      lat: lat,
+      lng: lng,
+      r: R_BLOCK,
+      blocked: true,
+      name: src.name,
+      nameZh: src.nameZh,
+      nameVi: src.nameVi
+    };
+  }
+  function buildBlockPts(dLat, dLng){
+    var source = BLOCK_HEXES.length ? BLOCK_HEXES : BLOCK_CONFIGS;
+    return source.map(function(b, idx){ return makeBlockPoint(b, idx, dLat, dLng); });
+  }
   function fullyCoveredByBlock(la, lo){
-    for (var b = 0; b < BLOCK_CONFIGS.length; b++) {
-      if (distKmRaw(la, lo, BLOCK_CONFIGS[b].lat, BLOCK_CONFIGS[b].lng) + R_OUTER <= R_BLOCK + 1e-9) return true;
+    for (var b = 0; b < blockPts.length; b++) {
+      if (distKmRaw(la, lo, blockPts[b].lat, blockPts[b].lng) + R_OUTER <= R_BLOCK + 1e-3) return true;
     }
     return false;
   }
   function generate(){
     var dLat = 1.5 * R_OUTER / KM_LAT;
     var dLng = Math.sqrt(3) * R_OUTER / KM_LNG;
+    blockPts = buildBlockPts(dLat, dLng);
     var iMin = Math.floor((sLatMin - dLat - ANCHOR.lat) / dLat);
     var iMax = Math.ceil((sLatMax + dLat - ANCHOR.lat) / dLat);
     var jMin = Math.floor((sLngMin - dLng - ANCHOR.lng) / dLng);
@@ -389,18 +432,6 @@
       }
     }
     out.sort(function(a, b){ return a.dC - b.dC; });
-    blockPts = BLOCK_CONFIGS.map(function(b, idx){
-      return {
-        id: idx + 1,
-        lat: +b.lat.toFixed(6),
-        lng: +b.lng.toFixed(6),
-        r: R_BLOCK,
-        blocked: true,
-        name: b.name,
-        nameZh: b.nameZh,
-        nameVi: b.nameVi
-      };
-    });
     pts = out.map(function(o, idx){
       return { id: idx + blockPts.length + 1, lat: +o.lat.toFixed(6), lng: +o.lng.toFixed(6), r: R_OUTER, override: null, extraBlock: false };
     });

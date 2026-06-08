@@ -5,7 +5,7 @@ Static GitHub Pages deployment for the Hanoi advertising circle zoning tool.
 ## Files
 
 - `index.html`: GitHub Pages entry page for the 193 Bà Triệu blocking version.
-- `targeted-block.html`: alternate entry page using three smaller targeted blocking circles, with blocking and outer radii synchronized.
+- `targeted-block.html`: alternate entry page using four smaller targeted blocking circles aligned to the same honeycomb grid, with blocking and outer radii synchronized.
 - `河内圈_种子数据.js`: seed coordinate data.
 - `河内圈_工具代码.js`: map, zoning, export, coordinate lookup, and language switching logic.
 - `vendor/`: local Leaflet and SheetJS assets so Excel export does not depend on CDN loading.
