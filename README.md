@@ -13,6 +13,8 @@ Static GitHub Pages deployment for the Hanoi advertising circle zoning tool.
 
 - Chinese/Vietnamese UI, with automatic language detection and a manual language selector.
 - Fuzzy coordinate lookup from plain coordinates, Google Ads Location strings, Google Maps URLs, lat/lng labels, Vietnamese coordinate labels, and reversed longitude/latitude order.
+- Circle hover/click details include the Google Ads Location coordinate string.
+- Optional extra blocking group: click outer circles to move them into an independent exclusion group, then copy or export that group separately.
 
 ## Deploy With GitHub Pages
 

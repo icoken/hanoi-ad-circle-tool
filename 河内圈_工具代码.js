@@ -25,7 +25,7 @@
       r2Label: '近郊半径 km',
       ringHint: '单中心模式：按上方所选圆心，核心一组，核心以外按 东北/东南/西南/西北 ×（近郊/远郊）分组。<br>三中心模式：每个圈划给最近的中心（Thái Hà / Xã Đàn / Bà Triệu），再按 核心/近郊/远郊 分档，共9组；三中心相距仅1–3km，建议把核心半径调小到2–3km。',
       zonesTitle: '分区 ＝ 广告系列名（可直接改名；两区改成同名即合并为一组）',
-      zonesHint: '第一行红色＝193屏蔽圈（#1），导入 Google Ads 后把它设为<b>排除位置</b>即可屏蔽该区域。「复制」＝复制该区 Campaign + Location 两列，直接粘贴进 Google Ads Editor 的 Make multiple changes 表格。',
+      zonesHint: '第一行红色＝193屏蔽圈（#1）；第二行红色＝可自选多个外围圈组成的附加屏蔽组。点击地图圆圈可加入/移出附加屏蔽组。导入 Google Ads 后请把屏蔽组设为<b>排除位置</b>。「复制」＝复制该区 Campaign + Location 两列。',
       coordTitle: '坐标检索',
       coordPlaceholder: '输入或粘贴坐标，例如 21.0115,105.8496',
       coordSearch: '查找所在圆圈',
@@ -43,10 +43,18 @@
       allAssigned: '✓ 全部已分配',
       countMismatch: '⚠ 数量不符！',
       blockDefaultName: '屏蔽-193 Bà Triệu',
+      extraBlockDefaultName: '屏蔽-附加圈',
       copy: '复制',
+      copyLocation: '复制坐标',
+      addExtraBlock: '加入附加屏蔽',
+      removeExtraBlock: '移出附加屏蔽',
+      extraBlockMeta: '自定义附加屏蔽组',
+      locationLabel: '坐标',
       copiedCampaignRows: '已复制「{name}」{n} 行（Campaign+Location）',
       copiedRows: '已复制「{name}」{n} 行',
+      copiedLocation: '已复制坐标：{location}',
       emptyZone: '该区暂无圆圈',
+      emptyExtraBlock: '附加屏蔽组暂无圆圈',
       copyFailed: '复制失败，请改用导出 Excel/CSV。',
       xlsxMissing: 'Excel 组件未加载成功，请刷新页面重试；或先用「导出 CSV」。',
       coordParseFailed: '无法识别坐标。可输入“纬度,经度”，或粘贴 Google Maps 链接、lat/lng 文本、Google Ads Location 字符串。',
@@ -61,6 +69,7 @@
       radius: '半径',
       distCenter: '距圆心',
       blockTooltip: '#1 屏蔽圈 · {name}（193 Bà Triệu，{radius}）',
+      circleTooltip: '#{id} · {name}{manual}<br>{location}',
       centerTooltip: '中心：{name}',
       manual: '（手动）',
       reassignCurrent: '圈 #{id}（当前：{name}）',
@@ -101,7 +110,7 @@
       r2Label: 'Bán kính cận đô km',
       ringHint: 'Chế độ một tâm: nhóm lõi riêng; ngoài lõi chia theo Đông Bắc/Đông Nam/Tây Nam/Tây Bắc × cận đô/xa.<br>Chế độ ba tâm: mỗi vòng thuộc về tâm gần nhất (Thái Hà / Xã Đàn / Bà Triệu), rồi chia lõi/cận đô/xa, tổng 9 nhóm; ba tâm chỉ cách nhau 1–3km, nên đặt bán kính lõi khoảng 2–3km.',
       zonesTitle: 'Vùng = tên chiến dịch (có thể đổi tên; đặt trùng tên để gộp vùng)',
-      zonesHint: 'Dòng màu đỏ đầu tiên là vòng chặn 193 (#1). Khi nhập vào Google Ads, hãy đặt nó trong <b>vị trí loại trừ</b>. Nút Sao chép sẽ sao chép hai cột Campaign + Location để dán vào Make multiple changes của Google Ads Editor.',
+      zonesHint: 'Dòng đỏ đầu tiên là vòng chặn 193 (#1); dòng đỏ thứ hai là nhóm chặn bổ sung do bạn tự chọn từ các vòng ngoài. Bấm vòng trên bản đồ để thêm/bỏ khỏi nhóm chặn bổ sung. Khi nhập vào Google Ads, hãy đặt các nhóm chặn trong <b>vị trí loại trừ</b>. Nút Sao chép sẽ sao chép hai cột Campaign + Location.',
       coordTitle: 'Tra cứu tọa độ',
       coordPlaceholder: 'Nhập hoặc dán tọa độ, ví dụ 21.0115,105.8496',
       coordSearch: 'Tìm vòng chứa tọa độ',
@@ -119,10 +128,18 @@
       allAssigned: '✓ Đã phân vùng toàn bộ',
       countMismatch: '⚠ Số lượng không khớp!',
       blockDefaultName: 'Chặn-193 Bà Triệu',
+      extraBlockDefaultName: 'Chặn-bổ sung',
       copy: 'Sao chép',
+      copyLocation: 'Sao chép tọa độ',
+      addExtraBlock: 'Thêm vào chặn bổ sung',
+      removeExtraBlock: 'Bỏ khỏi chặn bổ sung',
+      extraBlockMeta: 'Nhóm chặn bổ sung tùy chọn',
+      locationLabel: 'Tọa độ',
       copiedCampaignRows: 'Đã sao chép “{name}” {n} dòng (Campaign+Location)',
       copiedRows: 'Đã sao chép “{name}” {n} dòng',
+      copiedLocation: 'Đã sao chép tọa độ: {location}',
       emptyZone: 'Vùng này chưa có vòng nào',
+      emptyExtraBlock: 'Nhóm chặn bổ sung chưa có vòng nào',
       copyFailed: 'Sao chép thất bại, hãy dùng xuất Excel/CSV.',
       xlsxMissing: 'Thành phần Excel chưa tải được, hãy tải lại trang hoặc dùng xuất CSV.',
       coordParseFailed: 'Không nhận diện được tọa độ. Có thể nhập “vĩ độ, kinh độ”, hoặc dán link Google Maps, chữ lat/lng, chuỗi Google Ads Location.',
@@ -137,6 +154,7 @@
       radius: 'Bán kính',
       distCenter: 'Cách tâm',
       blockTooltip: '#1 Vòng chặn · {name} (193 Bà Triệu, {radius})',
+      circleTooltip: '#{id} · {name}{manual}<br>{location}',
       centerTooltip: 'Tâm: {name}',
       manual: ' (chỉnh tay)',
       reassignCurrent: 'Vòng #{id} (hiện tại: {name})',
@@ -292,7 +310,7 @@
     }
     out.sort(function(a, b){ return a.dC - b.dC; });
     pts = out.map(function(o, idx){
-      return { id: idx + 2, lat: +o.lat.toFixed(6), lng: +o.lng.toFixed(6), r: R_OUTER, override: null };
+      return { id: idx + 2, lat: +o.lat.toFixed(6), lng: +o.lng.toFixed(6), r: R_OUTER, override: null, extraBlock: false };
     });
     blockPt = { id: 1, lat: +C193.lat.toFixed(6), lng: +C193.lng.toFixed(6), r: R_BLOCK, blocked: true };
     lats = pts.map(function(p){ return p.lat; });
@@ -334,6 +352,9 @@
   }
   function blockName(){
     return (campaign.block !== undefined && campaign.block !== '') ? campaign.block : text('blockDefaultName');
+  }
+  function extraBlockName(){
+    return (campaign.extraBlock !== undefined && campaign.extraBlock !== '') ? campaign.extraBlock : text('extraBlockDefaultName');
   }
   function colorFor(zi){ return COLORS[zi % COLORS.length]; }
 
@@ -500,27 +521,41 @@
     circleLayer.addLayer(bc);
     circleLayer.addLayer(L.circleMarker([blockPt.lat, blockPt.lng], { radius: 4, color: BLOCK_COLOR, fillColor: BLOCK_COLOR, fillOpacity: 1 }));
     var counts = [0,0,0,0,0,0,0,0,0];
+    var extraCount = 0;
     for (var i = 0; i < pts.length; i++) {
       (function(p){
         var zi = assignZone(p);
-        counts[zi]++;
-        var col = colorFor(zi);
-        var c = L.circle([p.lat, p.lng], { radius: p.r * 1000, color: col, weight: 1, fillColor: col, fillOpacity: 0.3 });
-        c.bindTooltip('#' + p.id + ' · ' + curName(zi) + (p.override !== null ? text('manual') : ''), { sticky: true });
+        var name = p.extraBlock ? extraBlockName() : curName(zi);
+        if (p.extraBlock) extraCount++; else counts[zi]++;
+        var col = p.extraBlock ? BLOCK_COLOR : colorFor(zi);
+        var c = L.circle([p.lat, p.lng], {
+          radius: p.r * 1000,
+          color: col,
+          weight: p.extraBlock ? 2.5 : 1,
+          fillColor: col,
+          fillOpacity: p.extraBlock ? 0.42 : 0.3,
+          dashArray: p.extraBlock ? '5,4' : null
+        });
+        c.bindTooltip(fmt('circleTooltip', {
+          id: p.id,
+          name: name,
+          manual: p.extraBlock ? '' : (p.override !== null ? text('manual') : ''),
+          location: locStr(p)
+        }), { sticky: true });
         c.on('click', function(){ openReassign(p); });
         circleLayer.addLayer(c);
       })(pts[i]);
     }
-    var assigned = counts.reduce(function(a,b){ return a + b; }, 0) + 1;
+    var assigned = counts.reduce(function(a,b){ return a + b; }, 0) + extraCount + 1;
     document.getElementById('assigned').textContent = assigned;
     document.getElementById('checkmark').innerHTML = (assigned === pts.length + 1)
       ? '<span class="ok">' + text('allAssigned') + '</span>' : '<span class="warn">' + text('countMismatch') + '</span>';
     drawLines();
-    renderZones(counts);
+    renderZones(counts, extraCount);
     refreshCoordSearch();
   }
 
-  function renderZones(counts){
+  function renderZones(counts, extraCount){
     var box = document.getElementById('zones');
     box.innerHTML = '';
     var bdiv = document.createElement('div'); bdiv.className = 'zone';
@@ -533,6 +568,18 @@
     bcp.addEventListener('click', function(){ copyBlock(); });
     bdiv.appendChild(bcp);
     box.appendChild(bdiv);
+
+    var ediv = document.createElement('div'); ediv.className = 'zone';
+    var esw = document.createElement('span'); esw.className = 'sw'; esw.style.background = BLOCK_COLOR; ediv.appendChild(esw);
+    var einp = document.createElement('input'); einp.type = 'text'; einp.value = extraBlockName();
+    einp.addEventListener('input', function(){ campaign.extraBlock = einp.value; });
+    ediv.appendChild(einp);
+    var ecnt = document.createElement('span'); ecnt.className = 'cnt'; ecnt.textContent = extraCount || 0; ediv.appendChild(ecnt);
+    var ecp = document.createElement('button'); ecp.className = 'mini'; ecp.textContent = text('copy');
+    ecp.addEventListener('click', copyExtraBlock);
+    ediv.appendChild(ecp);
+    box.appendChild(ediv);
+
     for (var zi = 0; zi < 9; zi++) {
       (function(z){
         var div = document.createElement('div'); div.className = 'zone';
@@ -553,15 +600,25 @@
 
   function openReassign(p){
     var zi = assignZone(p);
-    var html = '<div style="font-size:12px">' + fmt('reassignCurrent', { id: p.id, name: curName(zi) }) + '<br>' + text('reassignTo') + ' <select id="reSel" style="margin-top:4px">';
+    var currentName = p.extraBlock ? extraBlockName() : curName(zi);
+    var html = '<div style="font-size:12px">' +
+      fmt('reassignCurrent', { id: p.id, name: currentName }) +
+      '<br>' + text('locationLabel') + '：<code>' + locStr(p) + '</code>' +
+      '<br><button id="copyLocBtn" class="mini" style="margin-top:6px">' + text('copyLocation') + '</button> ' +
+      '<button id="extraBlockBtn" class="mini" style="margin-top:6px">' + (p.extraBlock ? text('removeExtraBlock') : text('addExtraBlock')) + '</button>' +
+      '<br>' + text('reassignTo') + ' <select id="reSel" style="margin-top:4px">';
     for (var z = 0; z < 9; z++) html += '<option value="' + z + '"' + (z === zi ? ' selected' : '') + '>' + curName(z) + '</option>';
     html += '</select><br><button id="reBtn" class="mini" style="margin-top:6px">' + text('confirm') + '</button> <button id="reClr" class="mini" style="margin-top:6px">' + text('clearAuto') + '</button></div>';
     var pop = L.popup().setLatLng([p.lat, p.lng]).setContent(html).openOn(map);
     setTimeout(function(){
       var b = document.getElementById('reBtn');
       var cl = document.getElementById('reClr');
-      if (b) b.onclick = function(){ p.override = parseInt(document.getElementById('reSel').value, 10); map.closePopup(); render(); };
-      if (cl) cl.onclick = function(){ p.override = null; map.closePopup(); render(); };
+      var cp = document.getElementById('copyLocBtn');
+      var ex = document.getElementById('extraBlockBtn');
+      if (cp) cp.onclick = function(){ copyLocation(p); };
+      if (ex) ex.onclick = function(){ p.extraBlock = !p.extraBlock; map.closePopup(); render(); };
+      if (b) b.onclick = function(){ p.extraBlock = false; p.override = parseInt(document.getElementById('reSel').value, 10); map.closePopup(); render(); };
+      if (cl) cl.onclick = function(){ p.extraBlock = false; p.override = null; map.closePopup(); render(); };
     }, 30);
   }
 
@@ -571,7 +628,8 @@
     var rows = [{ ID: 1, Zone: blockName(), Campaign: blockName(), Location: locStr(blockPt), Latitude: blockPt.lat, Longitude: blockPt.lng }];
     pts.forEach(function(p){
       var zi = assignZone(p);
-      rows.push({ ID: p.id, Zone: curName(zi), Campaign: curName(zi), Location: locStr(p), Latitude: p.lat, Longitude: p.lng });
+      var name = p.extraBlock ? extraBlockName() : curName(zi);
+      rows.push({ ID: p.id, Zone: name, Campaign: name, Location: locStr(p), Latitude: p.lat, Longitude: p.lng });
     });
     return rows;
   }
@@ -613,24 +671,47 @@
     var tsv = 'Campaign\tLocation\n' + blockName() + '\t' + locStr(blockPt);
     doCopy(tsv, blockName(), 1);
   }
+  function copyExtraBlock(){
+    var name = extraBlockName();
+    var rows = pts.filter(function(p){ return p.extraBlock; });
+    if (!rows.length) { flash(text('emptyExtraBlock')); return; }
+    var tsv = 'Campaign\tLocation\n' + rows.map(function(p){ return name + '\t' + locStr(p); }).join('\n');
+    doCopy(tsv, name, rows.length);
+  }
   function copyZone(zi){
     var name = curName(zi);
-    var rows = pts.filter(function(p){ return assignZone(p) === zi; });
+    var rows = pts.filter(function(p){ return !p.extraBlock && assignZone(p) === zi; });
     if (!rows.length) { flash(text('emptyZone')); return; }
     var tsv = 'Campaign\tLocation\n' + rows.map(function(p){ return name + '\t' + locStr(p); }).join('\n');
     doCopy(tsv, name, rows.length);
   }
-  function doCopy(tsv, name, n){
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(tsv).then(
-        function(){ flash(fmt('copiedCampaignRows', { name: name, n: n })); },
-        function(){ fallbackCopy(tsv, name, n); }
-      );
-    } else { fallbackCopy(tsv, name, n); }
+  function copyLocation(p){
+    var location = locStr(p);
+    copyText(location, fmt('copiedLocation', { location: location }));
   }
-  function fallbackCopy(text, name, n){
+  function doCopy(tsv, name, n){
+    copyText(tsv, fmt('copiedCampaignRows', { name: name, n: n }), function(){ fallbackCopy(tsv, name, n); });
+  }
+  function copyText(value, successMsg, failFn){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(value).then(
+        function(){ flash(successMsg); },
+        function(){ if (failFn) failFn(); else fallbackTextCopy(value, successMsg); }
+      );
+    } else if (failFn) { failFn(); }
+    else { fallbackTextCopy(value, successMsg); }
+  }
+  function fallbackTextCopy(textValue, successMsg){
     var ta = document.createElement('textarea');
-    ta.value = text; ta.style.cssText = 'position:fixed;left:-9999px;';
+    ta.value = textValue; ta.style.cssText = 'position:fixed;left:-9999px;';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); flash(successMsg); }
+    catch(e){ alert(text('copyFailed')); }
+    ta.remove();
+  }
+  function fallbackCopy(textValue, name, n){
+    var ta = document.createElement('textarea');
+    ta.value = textValue; ta.style.cssText = 'position:fixed;left:-9999px;';
     document.body.appendChild(ta); ta.select();
     try { document.execCommand('copy'); flash(fmt('copiedRows', { name: name, n: n })); }
     catch(e){ alert(text('copyFailed')); }
@@ -697,9 +778,10 @@
         hits.push({
           point: p,
           isBlock: isBlock,
+          isExtraBlock: !!p.extraBlock,
           zone: zi,
-          name: isBlock ? blockName() : curName(zi),
-          color: isBlock ? BLOCK_COLOR : colorFor(zi),
+          name: isBlock ? blockName() : (p.extraBlock ? extraBlockName() : curName(zi)),
+          color: (isBlock || p.extraBlock) ? BLOCK_COLOR : colorFor(zi),
           dist: d
         });
       }
@@ -719,9 +801,10 @@
         best = {
           point: p,
           isBlock: isBlock,
+          isExtraBlock: !!p.extraBlock,
           zone: zi,
-          name: isBlock ? blockName() : curName(zi),
-          color: isBlock ? BLOCK_COLOR : colorFor(zi),
+          name: isBlock ? blockName() : (p.extraBlock ? extraBlockName() : curName(zi)),
+          color: (isBlock || p.extraBlock) ? BLOCK_COLOR : colorFor(zi),
           dist: d,
           edge: edge
         };
@@ -766,7 +849,7 @@
       div.appendChild(title);
       var meta = document.createElement('div');
       meta.textContent =
-        (hit.isBlock ? text('blockCircle') : text('adCircleZone')) +
+        (hit.isBlock ? text('blockCircle') : (hit.isExtraBlock ? text('extraBlockMeta') : text('adCircleZone'))) +
         '｜' + text('radius') + ' ' + rlabel(hit.point.r) +
         '｜' + text('distCenter') + ' ' + formatKm(hit.dist) +
         '｜' + locStr(hit.point);
